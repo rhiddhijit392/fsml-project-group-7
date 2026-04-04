@@ -1,18 +1,25 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
 
 def preprocess(df):
-    # 1. Convert date
-    df['Date'] = pd.to_datetime(df['Date'])
-    
-    # 2. Sort by company and date
-    df = df.sort_values(['Company', 'Date']).reset_index(drop=True)
-    
-    # 3. Encode company name
-    le = LabelEncoder()
-    df['Company_encoded'] = le.fit_transform(df['Company'])
-    
-    # 4. Drop unnecessary columns
-    df = df.drop(columns=['Company'])
-    
+    df = df.copy()
+
+    # 1. Clean column names
+    df.columns = [col.strip() for col in df.columns]
+
+    # 2. Convert Date column
+    df['Date'] = pd.to_datetime(df['Date'], utc=True).dt.tz_localize(None)
+
+    # 3. Sort data
+    if 'Company' in df.columns:
+        df = df.sort_values(['Company', 'Date'])
+    else:
+        df = df.sort_values('Date')
+
+    # 4. Handle missing values
+    df = df.ffill()
+
+    # 5. Reset index
+    df = df.reset_index(drop=True)
+    print(f"Preprocessing complete: {df.shape[0]} rows, {df.shape[1]} columns")
+
     return df
