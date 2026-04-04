@@ -1,0 +1,1 @@
+#treat current folder as module
