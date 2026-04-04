@@ -10,10 +10,7 @@ def preprocess(df):
     df['Date'] = pd.to_datetime(df['Date'], utc=True).dt.tz_localize(None)
 
     # 3. Sort data
-    if 'Company' in df.columns:
-        df = df.sort_values(['Company', 'Date'])
-    else:
-        df = df.sort_values('Date')
+    df = df.sort_values(['Company', 'Date'])
 
     # 4. Handle missing values
     df = df.ffill()
