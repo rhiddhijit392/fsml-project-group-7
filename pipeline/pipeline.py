@@ -1,0 +1,28 @@
+import sys
+import os
+
+# Add project root to Python path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from src.data_loader import load_data
+from src.preprocess import preprocess
+from src.features import build_features
+
+def run_pipeline():
+    # Step 1: Load data
+    df = load_data()
+
+    # Step 2: Preprocess
+    df = preprocess(df)
+
+    # Step 3: Feature engineering
+    df = build_features(df)
+
+    print(f"Pipeline complete: {df.shape[0]} rows, {df.shape[1]} columns")
+    return df
+
+if __name__ == "__main__":
+    df = run_pipeline()
+    print(df.head())
