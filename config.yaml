@@ -1,0 +1,11 @@
+# config.yaml
+model:
+  n_estimators: 100
+  random_state: 42
+
+data:
+  filepath: data/stock_details_5_years.csv
+  test_size: 0.2
+
+logging:
+  log_file: logs/app.log
