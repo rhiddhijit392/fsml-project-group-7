@@ -13,13 +13,17 @@ from src.features import build_features
 def run_pipeline():
     # Step 1: Load data
     df = load_data()
+    print("Columns after load_data:", df.columns.tolist())
 
     # Step 2: Preprocess
     df = preprocess(df)
+    print("Columns after preprocess:", df.columns.tolist()) 
 
     # Step 3: Feature engineering
     df = build_features(df)
-
+    print("Columns after build_features:", df.columns.tolist())
+    
+    #Pipeline upto DE work
     print(f"Pipeline complete: {df.shape[0]} rows, {df.shape[1]} columns")
     return df
 
