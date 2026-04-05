@@ -363,3 +363,99 @@
 [2026-04-05 01:20:43] INFO — Step 4: Displaying prediction results...
 [2026-04-05 01:20:43] INFO — Step 5: Saving predictions to CSV...
 [2026-04-05 01:20:44] INFO — Predictions saved to 'outputs/predictions.csv'
+[2026-04-05 12:07:43] INFO — Config loaded from 'config.yaml'
+[2026-04-05 12:07:43] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 12:07:43] INFO — =======================================================
+[2026-04-05 12:07:43] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 12:07:43] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 12:07:43] INFO —   Target : Next Day Closing Price
+[2026-04-05 12:07:43] INFO — =======================================================
+[2026-04-05 12:07:43] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 14:31:51] INFO — Config loaded from 'config.yaml'
+[2026-04-05 14:31:51] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 14:31:51] INFO — =======================================================
+[2026-04-05 14:31:51] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 14:31:51] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 14:31:51] INFO —   Target : Next Day Closing Price
+[2026-04-05 14:31:51] INFO — =======================================================
+[2026-04-05 14:31:51] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 14:31:52] WARNING — 'Next_Day_Close' not in columns. Creating it as fallback.
+[2026-04-05 14:31:52] WARNING — Ask teammate to add this line in features.py:
+[2026-04-05 14:31:52] WARNING —   df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
+[2026-04-05 14:31:52] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-05 14:31:52] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-05 14:31:52] INFO — Step 2: Defining features and target...
+[2026-04-05 14:31:52] INFO — Features (8): ['Open', 'High', 'Low', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-05 14:31:52] INFO — Target              : Next_Day_Close
+[2026-04-05 14:31:52] INFO — X shape             : (600180, 8)
+[2026-04-05 14:31:52] INFO — y shape             : (600180,)
+[2026-04-05 14:31:52] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-05 14:31:52] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-05 14:31:52] INFO — Train size : 480144 rows
+[2026-04-05 14:31:52] INFO — Test size  : 120036 rows
+[2026-04-05 14:31:52] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-05 14:31:52] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-05 14:33:00] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-05 14:33:00] INFO —    MAE      : 1.8028   (avg error in $ price)
+[2026-04-05 14:33:00] INFO —    RMSE     : 3.5875  (penalizes large errors more)
+[2026-04-05 14:33:00] INFO —    R2 Score : 0.9989   (1.0 = perfect fit)
+[2026-04-05 14:33:00] INFO — --------------------------------------------------
+[2026-04-05 14:33:00] INFO — Random Forest training complete.
+[2026-04-05 14:33:00] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-05 14:33:02] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-05 14:33:02] INFO —    MAE      : 2.3402   (avg error in $ price)
+[2026-04-05 14:33:02] INFO —    RMSE     : 6.8389  (penalizes large errors more)
+[2026-04-05 14:33:02] INFO —    R2 Score : 0.9961   (1.0 = perfect fit)
+[2026-04-05 14:33:02] INFO — --------------------------------------------------
+[2026-04-05 14:33:02] INFO — XGBoost training complete.
+[2026-04-05 14:33:02] INFO — Step 6: Comparing both models...
+[2026-04-05 14:33:02] INFO — Model comparison table generated.
+[2026-04-05 14:33:02] INFO — Step 7: Saving the best model...
+[2026-04-05 14:33:06] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-05 14:33:06] INFO — Best model : Random Forest Regressor
+[2026-04-05 14:33:06] INFO — Saved to   : models/model_v1.pkl
+[2026-04-05 14:33:06] INFO — R2 Score   : 0.9989
+[2026-04-05 16:24:25] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-05 16:24:25] INFO — =======================================================
+[2026-04-05 16:24:25] INFO —   MODEL EVALUATION PIPELINE
+[2026-04-05 16:24:25] INFO —   Loading saved model and evaluating on test data
+[2026-04-05 16:24:25] INFO — =======================================================
+[2026-04-05 16:24:25] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-05 16:24:32] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 16:24:32] INFO — Model loaded: RandomForestRegressor
+[2026-04-05 16:24:32] INFO — Step 2: Running pipeline to rebuild data...
+[2026-04-05 16:24:32] WARNING — 'Next_Day_Close' not found. Creating it as fallback.
+[2026-04-05 16:24:33] INFO — Clean data shape: (600180, 15)
+[2026-04-05 16:24:33] INFO — Step 3: Recreating train/test split (same as train.py)...
+[2026-04-05 16:24:33] INFO — Test set size: 120036 rows
+[2026-04-05 16:24:33] INFO — Step 4: Generating predictions and computing metrics...
+[2026-04-05 16:24:33] INFO — -------------------------------------------------------
+[2026-04-05 16:24:33] INFO —   Model         : RandomForestRegressor
+[2026-04-05 16:24:33] INFO —   Test samples  : 120036
+[2026-04-05 16:24:33] INFO —   MAE           : 1.8028  (avg $ error per prediction)
+[2026-04-05 16:24:33] INFO —   RMSE          : 3.5875 (error penalizing big mistakes)
+[2026-04-05 16:24:33] INFO —   R2 Score      : 0.9989  (1.0 = perfect)
+[2026-04-05 16:24:33] INFO — -------------------------------------------------------
+[2026-04-05 16:24:33] INFO — Step 5: Generating Actual vs Predicted plot...
+[2026-04-05 16:24:34] INFO — Plots saved to 'outputs/evaluation_plots.png'
+[2026-04-05 16:25:07] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-05 16:25:07] INFO — =======================================================
+[2026-04-05 16:25:07] INFO —   STOCK PRICE PREDICTION PIPELINE
+[2026-04-05 16:25:07] INFO —   Predicting: Next Day Closing Price
+[2026-04-05 16:25:07] INFO — =======================================================
+[2026-04-05 16:25:07] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-05 16:25:14] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 16:25:14] INFO — Model loaded: RandomForestRegressor
+[2026-04-05 16:25:14] INFO — Step 2: Loading data from pipeline...
+[2026-04-05 16:25:15] INFO — Clean data shape: (600671, 14)
+[2026-04-05 16:25:15] INFO — Step 3: Predicting next day close for latest data per company...
+[2026-04-05 16:25:15] INFO — Predicting on 4910 rows across 491 companies...
+[2026-04-05 16:25:15] INFO — Step 4: Displaying prediction results...
+[2026-04-05 16:25:15] INFO — Step 5: Saving predictions to CSV...
+[2026-04-05 16:25:15] INFO — Predictions saved to 'outputs/predictions.csv'
+[2026-04-05 16:26:35] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 16:26:35] INFO — Model loaded at startup: RandomForestRegressor
+[2026-04-05 16:27:40] INFO — Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-05 16:27:40] INFO — Prediction: $151.75 | Direction: UP
+[2026-04-05 16:27:58] INFO — Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-05 16:27:58] INFO — Prediction: $151.75 | Direction: UP
