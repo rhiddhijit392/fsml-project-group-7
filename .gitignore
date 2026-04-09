@@ -23,3 +23,6 @@ venv/
 
 # --- MacOS ---
 .DS_Store
+*.pkl
+*.pkl
+*.log
