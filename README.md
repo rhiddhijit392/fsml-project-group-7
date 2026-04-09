@@ -21,3 +21,35 @@ ML Role Now:-
 ## Model
 Model is not tracked in git due to file size.
 Run python src/train.py to regenerate model_v1.pkl locally.
+
+
+
+XGBoost uses OpenMP for parallelism.
+Instead of manual OpenMP runtime installation using "libgomp1" (platform dependant) on each machine, we'll use docker for making it reproducable.
+Docker Setup:
+
+1. Install Docker
+Download Docker Desktop:
+https://www.docker.com/products/docker-desktop
+
+Verify:
+docker --version
+
+---
+2. Project Setup:
+(Create a Dockerfile)
+---
+3. Build Docker Image:
+docker build -t fsml-project .
+
+---
+4. Run Project:
+docker run fsml-project
+
+---
+5. Persist Outputs:
+docker run -v $(pwd)/models:/app/models fsml-project
+
+---
+6. Rebuild After Changes:
+docker build -t fsml-project .
