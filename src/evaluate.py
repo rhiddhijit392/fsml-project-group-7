@@ -22,7 +22,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import TimeSeriesSplit
 
 from pipeline.pipeline import run_pipeline
 from src.utils import setup_logger, load_model, ensure_dirs
@@ -77,6 +77,7 @@ FEATURE_COLS = [
     'Open',
     'High',
     'Low',
+    'Close',         # added back -- TimeSeriesSplit prevents leakage
     'Volume',
     'Daily_Return',
     'Price_Range',
@@ -88,13 +89,12 @@ TARGET_COL = 'Next_Day_Close'
 X = df[FEATURE_COLS]
 y = df[TARGET_COL]
 
-# shuffle=False — must match train.py exactly so we get the same test set
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
-    test_size=0.2,
-    random_state=42,
-    shuffle=False
-)
+# TimeSeriesSplit -- must match train.py exactly so we get the same test set
+tscv = TimeSeriesSplit(n_splits=5)
+for fold, (train_idx, test_idx) in enumerate(tscv.split(X)):
+    X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+    y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+# After loop, last fold = most recent time period (same as train.py)
 
 logger.info(f"Test set size: {X_test.shape[0]} rows")
 
