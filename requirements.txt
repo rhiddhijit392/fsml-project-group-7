@@ -1,4 +1,7 @@
 numpy
 pandas
 matplotlib
-xgboost
+xgboost 
+PyYAML
+joblib
+scikit-learn
