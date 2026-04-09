@@ -30,6 +30,7 @@ FEATURE_COLS = [
     'Open',
     'High',
     'Low',
+    'Close',         # added back -- TimeSeriesSplit prevents leakage
     'Volume',
     'Daily_Return',
     'Price_Range',
