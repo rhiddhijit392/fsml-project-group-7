@@ -23,7 +23,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from xgboost import XGBRegressor
 
@@ -35,6 +35,7 @@ from src.utils import (
     ensure_dirs,
     compare_models,
 )
+tscv = TimeSeriesSplit(n_splits=5)
 
 # -- Logger & Config ----------------------------------------------------------
 logger = setup_logger("logs/app.log")
@@ -122,6 +123,7 @@ FEATURE_COLS = [
     'Open',          # today's open price
     'High',          # today's highest price
     'Low',           # today's lowest price
+    'Close',           # today's lowest price
     'Volume',        # today's trading volume
     'Daily_Return',  # (Close - Open) / Open  -- momentum signal
     'Price_Range',   # High - Low             -- volatility signal
@@ -156,12 +158,10 @@ logger.info("Step 3: Splitting data (80% train / 20% test, no shuffle)...")
 # shuffle=False is critical for time-series stock data!
 # Past data trains the model, future data tests it.
 # Shuffling would let the model see future data during training (cheating).
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
-    test_size=0.2,
-    random_state=42,
-    shuffle=False
-)
+for fold, (train_idx, test_idx) in enumerate(tscv.split(X)):
+    X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+    y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+    print(f"Fold {fold+1}: Train={len(train_idx)} rows, Test={len(test_idx)} rows")
 
 logger.info(f"Train size : {X_train.shape[0]} rows")
 logger.info(f"Test size  : {X_test.shape[0]} rows")
