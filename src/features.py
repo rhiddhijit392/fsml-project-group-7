@@ -21,6 +21,7 @@ def build_features(df):
     df['Next_Day_UP'] = (
         df.groupby('Company')['Close'].shift(-1) > df['Close']
     ).astype(int)
+    df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
 
     # 6. Drop NaN rows
     df = df.dropna().reset_index(drop=True)
