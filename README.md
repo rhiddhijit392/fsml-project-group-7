@@ -23,8 +23,9 @@ ML Role Now:-
 Model is currently not tracked in git due to file size limitation.  
 Generate it locally using:
 ```
-python src/train.py to regenerate model_v1.pkl
+python src/train.py
 ```
+this will to regenerate model located at ```models/model_v1.pkl```
 
 ## Docker Setup
 
