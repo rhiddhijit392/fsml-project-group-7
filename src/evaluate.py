@@ -1,11 +1,9 @@
 """
 evaluate.py - Evaluate the saved best model on test data
-Loads  : models/model_v1.pkl  (saved by train.py)
-Runs   : full pipeline to get the same clean data
-Outputs: MAE, RMSE, R2, residual plot, actual vs predicted plot
+Outputs: MAE, RMSE, R2, Confusion Matrix (UP/DOWN), 3 plots
 
-Run this AFTER train.py has been run at least once.
-Command: python src/evaluate.py
+Run standalone : python src/evaluate.py
+Called by      : pipeline/pipeline.py
 """
 
 import sys
@@ -14,187 +12,160 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use('Agg')  # non-interactive backend — safe for all systems
+matplotlib.use('Agg')
+import seaborn as sns
 
-# -- Path setup ---------------------------------------------------------------
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import (
+    mean_absolute_error, mean_squared_error, r2_score,
+    confusion_matrix, accuracy_score, classification_report,
+)
 from sklearn.model_selection import TimeSeriesSplit
 
 from pipeline.pipeline import run_pipeline
 from src.utils import setup_logger, load_model, ensure_dirs
 
-# -- Logger & directories -----------------------------------------------------
 logger = setup_logger("logs/app.log")
 ensure_dirs(["logs/", "outputs/"])
 
-
-# =============================================================================
-# STEP 1 -- Load the Saved Model
-# =============================================================================
-
-logger.info("=" * 55)
-logger.info("  MODEL EVALUATION PIPELINE")
-logger.info("  Loading saved model and evaluating on test data")
-logger.info("=" * 55)
-
-MODEL_PATH = "models/model_v1.pkl"
-logger.info(f"Step 1: Loading model from '{MODEL_PATH}'...")
-model = load_model(MODEL_PATH)
-logger.info(f"Model loaded: {type(model).__name__}")
-
-
-# =============================================================================
-# STEP 2 -- Rebuild the Same Data (same as train.py)
-# =============================================================================
-
-logger.info("Step 2: Running pipeline to rebuild data...")
-df = run_pipeline()
-
-# -- Add target if not present ------------------------------------------------
-if 'Next_Day_Close' not in df.columns:
-    logger.warning("'Next_Day_Close' not found. Creating it as fallback.")
-    df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
-    df = df.dropna(subset=['Next_Day_Close']).reset_index(drop=True)
-
-# -- Clean inf/NaN ------------------------------------------------------------
-df = df.replace([float('inf'), float('-inf')], float('nan'))
-df = df.dropna().reset_index(drop=True)
-logger.info(f"Clean data shape: {df.shape}")
-
-
-# =============================================================================
-# STEP 3 -- Recreate the Same Train/Test Split
-# =============================================================================
-
-logger.info("Step 3: Recreating train/test split (same as train.py)...")
-
-# Must use EXACT same feature list and split params as train.py
 FEATURE_COLS = [
-    'Open',
-    'High',
-    'Low',
-    'Close',         # added back -- TimeSeriesSplit prevents leakage
-    'Volume',
-    'Daily_Return',
-    'Price_Range',
-    'MA_5',
-    'Volume_Change',
+    'Open', 'High', 'Low', 'Close', 'Volume',
+    'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change',
 ]
 TARGET_COL = 'Next_Day_Close'
-
-X = df[FEATURE_COLS]
-y = df[TARGET_COL]
-
-# TimeSeriesSplit -- must match train.py exactly so we get the same test set
-tscv = TimeSeriesSplit(n_splits=5)
-for fold, (train_idx, test_idx) in enumerate(tscv.split(X)):
-    X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-    y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
-# After loop, last fold = most recent time period (same as train.py)
-
-logger.info(f"Test set size: {X_test.shape[0]} rows")
+MODEL_PATH  = "models/model_v1.pkl"
 
 
-# =============================================================================
-# STEP 4 -- Generate Predictions & Compute Metrics
-# =============================================================================
+def run_evaluation(df=None, model=None, X_test=None, y_test=None, test_indices=None):
+    logger.info("=" * 55)
+    logger.info("  MODEL EVALUATION PIPELINE")
+    logger.info("  Regression Metrics + Direction Confusion Matrix")
+    logger.info("=" * 55)
 
-logger.info("Step 4: Generating predictions and computing metrics...")
+    # Step 1 -- Load model
+    if model is None:
+        model = load_model(MODEL_PATH)
+    logger.info(f"Model: {type(model).__name__}")
 
-y_pred = model.predict(X_test)
+    # Step 2 -- Rebuild data (standalone mode only)
+    if df is None:
+        df = run_pipeline()
+        if TARGET_COL not in df.columns:
+            df[TARGET_COL] = df.groupby('Company')['Close'].shift(-1)
+            df = df.dropna(subset=[TARGET_COL]).reset_index(drop=True)
+        df = df.replace([float('inf'), float('-inf')], float('nan'))
+        df = df.dropna().reset_index(drop=True)
+        logger.info(f"Clean data shape: {df.shape}")
 
-mae  = round(mean_absolute_error(y_test, y_pred), 4)
-rmse = round(np.sqrt(mean_squared_error(y_test, y_pred)), 4)
-r2   = round(r2_score(y_test, y_pred), 4)
+    # Step 3 -- Recreate TimeSeriesSplit (standalone mode only)
+    if X_test is None:
+        X = df[FEATURE_COLS]
+        y = df[TARGET_COL]
+        tscv = TimeSeriesSplit(n_splits=5)
+        for fold, (train_idx, test_idx) in enumerate(tscv.split(X)):
+            X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+            y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+            test_indices    = test_idx
+    logger.info(f"Test set size: {len(y_test):,} rows")
 
-# Residuals = actual - predicted (how far off each prediction was)
-residuals = y_test.values - y_pred
+    # Step 4 -- Generate predictions and regression metrics
+    y_pred    = model.predict(X_test)
+    residuals = y_test.values - y_pred
+    mae  = round(mean_absolute_error(y_test, y_pred), 4)
+    rmse = round(np.sqrt(mean_squared_error(y_test, y_pred)), 4)
+    r2   = round(r2_score(y_test, y_pred), 4)
 
-logger.info("-" * 55)
-logger.info(f"  Model         : {type(model).__name__}")
-logger.info(f"  Test samples  : {len(y_test)}")
-logger.info(f"  MAE           : {mae}  (avg $ error per prediction)")
-logger.info(f"  RMSE          : {rmse} (error penalizing big mistakes)")
-logger.info(f"  R2 Score      : {r2}  (1.0 = perfect)")
-logger.info("-" * 55)
+    logger.info(f"  MAE: {mae} | RMSE: {rmse} | R2: {r2}")
 
-print("\n")
-print("=" * 55)
-print(f"  EVALUATION RESULTS — {type(model).__name__}")
-print("=" * 55)
-print(f"  Test Samples  : {len(y_test):,}")
-print(f"  MAE           : ${mae}  (avg price error)")
-print(f"  RMSE          : ${rmse}")
-print(f"  R2 Score      : {r2}")
-print("=" * 55)
+    print("\n")
+    print("=" * 55)
+    print(f"  REGRESSION RESULTS -- {type(model).__name__}")
+    print("=" * 55)
+    print(f"  Test Samples : {len(y_test):,}")
+    print(f"  MAE          : ${mae}  (avg price error)")
+    print(f"  RMSE         : ${rmse}")
+    print(f"  R2 Score     : {r2}")
+    print("=" * 55)
+    print(f"  - On average the model is ${mae} off per prediction")
+    print(f"  - R2={r2} means model explains {round(r2*100,2)}% of price variance")
+    if r2 >= 0.95:
+        print("  - Verdict: Excellent fit for stock price prediction")
+    elif r2 >= 0.85:
+        print("  - Verdict: Good fit, acceptable for stock prediction")
+    else:
+        print("  - Verdict: Moderate fit, consider feature engineering")
+    print("=" * 55)
 
-# Human readable interpretation
-print("\n  What this means:")
-print(f"  - On average the model is ${mae} off per prediction")
-print(f"  - R2={r2} means model explains {round(r2*100, 2)}% of price variance")
-if r2 >= 0.95:
-    print("  - Verdict: Excellent fit for stock price prediction")
-elif r2 >= 0.85:
-    print("  - Verdict: Good fit, acceptable for stock prediction")
-else:
-    print("  - Verdict: Moderate fit, consider feature engineering")
-print("=" * 55)
+    # Step 5 -- Confusion matrix (UP/DOWN direction)
+    close_test       = df['Close'].iloc[test_indices].values
+    pred_direction   = (y_pred > close_test).astype(int)
+    actual_direction = (y_test.values > close_test).astype(int)
+    cm               = confusion_matrix(actual_direction, pred_direction)
+    dir_accuracy     = round(accuracy_score(actual_direction, pred_direction), 4)
+    tn, fp, fn, tp   = cm.ravel()
+
+    logger.info(f"  Direction Accuracy: {dir_accuracy} ({round(dir_accuracy*100,2)}%)")
+
+    print("\n")
+    print("=" * 55)
+    print("  DIRECTION RESULTS (UP / DOWN Prediction)")
+    print("=" * 55)
+    print(f"  Direction Accuracy : {round(dir_accuracy*100, 2)}%")
+    print(f"  True Positives     : {tp:,}  (correctly predicted UP)")
+    print(f"  True Negatives     : {tn:,}  (correctly predicted DOWN)")
+    print(f"  False Positives    : {fp:,}  (predicted UP, was DOWN)")
+    print(f"  False Negatives    : {fn:,}  (predicted DOWN, was UP)")
+    print("=" * 55)
+    print(classification_report(actual_direction, pred_direction,
+                                 target_names=["DOWN (0)", "UP (1)"]))
+
+    # Step 6 -- Generate 3 plots
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig.suptitle(f"Model Evaluation -- {type(model).__name__}", fontsize=13)
+
+    idx = np.random.choice(len(y_test), min(1000, len(y_test)), replace=False)
+    axes[0].scatter(y_test.values[idx], y_pred[idx],
+                    alpha=0.3, s=10, color='steelblue', label='Predictions')
+    mn = min(y_test.values[idx].min(), y_pred[idx].min())
+    mx = max(y_test.values[idx].max(), y_pred[idx].max())
+    axes[0].plot([mn, mx], [mn, mx], 'r--', lw=2, label='Perfect fit')
+    axes[0].set_xlabel("Actual Next Day Close ($)")
+    axes[0].set_ylabel("Predicted Next Day Close ($)")
+    axes[0].set_title("Actual vs Predicted")
+    axes[0].legend()
+
+    axes[1].hist(residuals, bins=60, color='steelblue', edgecolor='white', alpha=0.8)
+    axes[1].axvline(0, color='red', linestyle='--', lw=2, label='Zero error')
+    axes[1].axvline(residuals.mean(), color='orange', linestyle='--', lw=1.5,
+                    label=f'Mean={residuals.mean():.2f}')
+    axes[1].set_xlabel("Residual (Actual - Predicted) in $")
+    axes[1].set_ylabel("Frequency")
+    axes[1].set_title("Residuals Distribution")
+    axes[1].legend()
+
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                xticklabels=['Predicted DOWN', 'Predicted UP'],
+                yticklabels=['Actual DOWN', 'Actual UP'],
+                ax=axes[2], linewidths=0.5)
+    axes[2].set_title(f"Confusion Matrix\nAccuracy: {round(dir_accuracy*100,2)}%")
+    axes[2].set_ylabel("Actual Direction")
+    axes[2].set_xlabel("Predicted Direction")
+
+    plt.tight_layout()
+    plot_path = "outputs/evaluation_plots.png"
+    plt.savefig(plot_path, dpi=120)
+    plt.close()
+
+    logger.info(f"3 plots saved to '{plot_path}'")
+    print(f"\nPlots saved to: {plot_path}")
+    print("  Plot 1 -- Actual vs Predicted")
+    print("  Plot 2 -- Residuals Distribution")
+    print("  Plot 3 -- Confusion Matrix (UP/DOWN)")
+    print("\nEvaluation complete!")
 
 
-# =============================================================================
-# STEP 5 -- Plot 1: Actual vs Predicted
-# =============================================================================
-
-logger.info("Step 5: Generating Actual vs Predicted plot...")
-
-# Sample 1000 points so plot is readable (not 120K dots)
-sample_size = min(1000, len(y_test))
-idx = np.random.choice(len(y_test), sample_size, replace=False)
-
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-fig.suptitle(f"Model Evaluation — {type(model).__name__}", fontsize=13)
-
-# -- Plot 1: Actual vs Predicted scatter --------------------------------------
-axes[0].scatter(
-    y_test.values[idx],
-    y_pred[idx],
-    alpha=0.3,
-    s=10,
-    color='steelblue',
-    label='Predictions'
-)
-# Perfect prediction line (if model was perfect, all dots would sit on this)
-min_val = min(y_test.values[idx].min(), y_pred[idx].min())
-max_val = max(y_test.values[idx].max(), y_pred[idx].max())
-axes[0].plot([min_val, max_val], [min_val, max_val], 'r--', lw=2, label='Perfect fit')
-
-axes[0].set_xlabel("Actual Next Day Close ($)")
-axes[0].set_ylabel("Predicted Next Day Close ($)")
-axes[0].set_title("Actual vs Predicted")
-axes[0].legend()
-
-# -- Plot 2: Residuals distribution -------------------------------------------
-axes[1].hist(residuals, bins=60, color='steelblue', edgecolor='white', alpha=0.8)
-axes[1].axvline(0, color='red', linestyle='--', lw=2, label='Zero error')
-axes[1].axvline(residuals.mean(), color='orange', linestyle='--', lw=1.5,
-                label=f'Mean={residuals.mean():.2f}')
-
-axes[1].set_xlabel("Residual (Actual - Predicted) in $")
-axes[1].set_ylabel("Frequency")
-axes[1].set_title("Residuals Distribution")
-axes[1].legend()
-
-plt.tight_layout()
-
-# Save plot
-plot_path = "outputs/evaluation_plots.png"
-plt.savefig(plot_path, dpi=120)
-plt.close()
-
-logger.info(f"Plots saved to '{plot_path}'")
-print(f"\nPlots saved to: {plot_path}")
-print("\nEvaluation complete!")
+if __name__ == "__main__":
+    run_evaluation()
