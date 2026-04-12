@@ -17,39 +17,39 @@ ML Role Now:-
 
 **3) src/evaluate.py**=>Loads the saved best model and evaluates it on the held-out test set. Reports MAE, RMSE, and R² score with a human-readable verdict. Generates two plots — Actual vs Predicted scatter and Residuals Distribution — saved to outputs/evaluation_plots.png.
 
-**4)src/predict.py**=>Loads the saved model and generates next day closing price predictions for the most recent trading data per company. Outputs a formatted table with predicted price, expected dollar change, and UP/DOWN direction signal. Saves full results to outputs/predictions.csv 
+**4)src/predict.py**=>Loads the saved model and generates next day closing price predictions for the most recent trading data per company. Outputs a formatted table with predicted price, expected dollar change, and UP/DOWN direction signal. Saves full results to outputs/predictions.csv
+
 ## Model
-Model is not tracked in git due to file size.
-Run python src/train.py to regenerate model_v1.pkl locally.
+Model is currently not tracked in git due to file size limitation.  
+Generate it locally using:
+```
+python src/train.py to regenerate model_v1.pkl
+```
 
+## Docker Setup
 
-
-XGBoost uses OpenMP for parallelism.
-Instead of manual OpenMP runtime installation using "libgomp1" (platform dependant) on each machine, we'll use docker for making it reproducable.
-Docker Setup:
-
-1. Install Docker
-Download Docker Desktop:
-https://www.docker.com/products/docker-desktop
-
-Verify:
+1. Install Docker:  
+Download ```docker-desktop``` from
+https://www.docker.com/products/docker-desktop and install it.  
+2. Verify your installation:
+```
 docker --version
-
----
-2. Project Setup:
-(Create a Dockerfile)
----
-3. Build Docker Image:
+```
+3. Project Setup:  
+A Dockerfile is already available at ```src/Dockerfile``` in this project.
+4. Build Docker Image:
+```
 docker build -t fsml-project .
-
----
-4. Run Project:
+```
+5. Run Project:
+```
 docker run fsml-project
-
----
-5. Persist Outputs:
+```
+6. Persist Outputs:
+```
 docker run -v $(pwd)/models:/app/models fsml-project
-
----
-6. Rebuild After Changes:
+```
+7. Rebuild After Changes:
+```
 docker build -t fsml-project .
+```
