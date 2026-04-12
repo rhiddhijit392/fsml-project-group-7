@@ -29,28 +29,27 @@ this will to regenerate model located at ```models/model_v1.pkl```
 
 ## Docker Setup
 
-1. Install Docker:  
-Download ```docker-desktop``` from
-https://www.docker.com/products/docker-desktop and install it.  
-2. Verify your installation:
+**1. Install Docker:**  
+Download ```docker-desktop``` from https://www.docker.com/products/docker-desktop and install it.  
+**2. Verify your installation:**
 ```
 docker --version
 ```
-3. Project Setup:  
-A Dockerfile is already available at ```src/Dockerfile``` in this project.
-4. Build Docker Image:
+**3. Project Setup:**  
+A ```Dockerfile``` is already available in this project's root folder.  
+**4. Build Docker Image:**
 ```
 docker build -t fsml-project .
 ```
-5. Run Project:
+**5. Run Project:**
 ```
 docker run fsml-project
 ```
-6. Persist Outputs:
+**6. Persist Outputs:**
 ```
 docker run -v $(pwd)/models:/app/models fsml-project
 ```
-7. Rebuild After Changes:
+**7. Rebuild After Changes:**
 ```
 docker build -t fsml-project .
 ```
