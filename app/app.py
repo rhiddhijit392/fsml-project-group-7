@@ -40,6 +40,7 @@ FEATURE_COLS = [
     'Open',
     'High',
     'Low',
+    'Close',
     'Volume',
     'Daily_Return',
     'Price_Range',
