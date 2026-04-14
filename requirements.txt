@@ -5,5 +5,6 @@ xgboost==2.0.3
 PyYAML
 joblib
 scikit-learn
+seaborn
 FastAPI
 uvicorn
