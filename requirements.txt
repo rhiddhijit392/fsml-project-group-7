@@ -5,3 +5,5 @@ xgboost
 PyYAML
 joblib
 scikit-learn
+FastAPI
+uvicorn

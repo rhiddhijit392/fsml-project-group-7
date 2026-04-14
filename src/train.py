@@ -22,7 +22,6 @@ from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from xgboost import XGBRegressor
 
-from pipeline.pipeline import run_pipeline
 from src.utils import setup_logger, load_config, save_model, ensure_dirs, compare_models
 
 logger = setup_logger("logs/app.log")
@@ -58,18 +57,6 @@ def run_training(df: pd.DataFrame):
     logger.info("  Models : Random Forest | XGBoost")
     logger.info("  Target : Next Day Closing Price")
     logger.info("=" * 55)
-
-    # Step 1 -- Add regression target if not present
-    if TARGET_COL not in df.columns:
-        logger.warning(f"'{TARGET_COL}' not found. Creating fallback.")
-        df[TARGET_COL] = df.groupby('Company')['Close'].shift(-1)
-        df = df.dropna(subset=[TARGET_COL]).reset_index(drop=True)
-
-    # Step 2 -- Clean infinity and NaN values
-    rows_before = df.shape[0]
-    df = df.replace([float('inf'), float('-inf')], float('nan'))
-    df = df.dropna().reset_index(drop=True)
-    logger.info(f"Removed {rows_before - df.shape[0]} bad rows. Shape: {df.shape}")
 
     # Step 3 -- Define features and target
     missing = [c for c in FEATURE_COLS + [TARGET_COL] if c not in df.columns]
@@ -141,7 +128,6 @@ def run_training(df: pd.DataFrame):
 
     return best_model, X_test, y_test, saved_test_idx
 
-
+#standalone run warning
 if __name__ == "__main__":
-    df = run_pipeline()
-    run_training(df)
+    print("train.py is a module only. Use pipeline.py for execution.")
