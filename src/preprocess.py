@@ -12,8 +12,10 @@ def preprocess(df):
     # 3. Sort data
     df = df.sort_values(['Company', 'Date'])
 
-    # 4. Handle missing values
-    df = df.ffill()
+    # 4. Handle missing values per company
+    df = df.set_index('Company')
+    df = df.groupby(level=0).ffill()
+    df = df.reset_index()
 
     # 5. Reset index
     df = df.reset_index(drop=True)
