@@ -9,6 +9,7 @@ if PROJECT_ROOT not in sys.path:
 from src.data_loader import load_data
 from src.preprocess import preprocess
 from src.features import build_features
+from src.train import run_training
 
 def run_pipeline():
     # Step 1: Load data
@@ -24,7 +25,11 @@ def run_pipeline():
     print("Columns after build_features:", df.columns.tolist())
     
     #Pipeline upto DE work
-    print(f"Pipeline complete: {df.shape[0]} rows, {df.shape[1]} columns")
+    print(f"Data Pipeline complete: {df.shape[0]} rows, {df.shape[1]} columns")
+
+    # Step 4: Train model
+    run_training(df)
+    
     return df
 
 if __name__ == "__main__":

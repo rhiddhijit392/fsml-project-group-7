@@ -1,0 +1,886 @@
+[2026-04-04 23:24:55] WARNING � Config file not found at 'config.yaml'. Returning empty config.
+[2026-04-04 23:24:55] INFO � Directories ensured: ['models/', 'logs/']
+[2026-04-04 23:24:55] INFO � =======================================================
+[2026-04-04 23:24:55] INFO �   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-04 23:24:55] INFO � =======================================================
+[2026-04-04 23:24:59] INFO � Data shape after pipeline: (600337, 15)
+[2026-04-04 23:24:59] INFO � Columns available: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits', 'Company', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change', 'Next_Day_UP', 'Next_Day_Close']
+[2026-04-04 23:24:59] INFO � Step 2: Defining features and target...
+[2026-04-04 23:24:59] INFO � Features shape : (600337, 9)
+[2026-04-04 23:24:59] INFO � Target shape   : (600337,)
+[2026-04-04 23:24:59] INFO � Target preview : min=1.03, max=6509.35, mean=140.32
+[2026-04-04 23:24:59] INFO � Step 3: Splitting data (80% train / 20% test)...
+[2026-04-04 23:24:59] INFO � Train size : 480269 rows
+[2026-04-04 23:24:59] INFO � Test size  : 120068 rows
+[2026-04-04 23:24:59] INFO � Step 4: Training Model 1 � Linear Regression...
+[2026-04-04 23:34:24] WARNING � Config file not found at 'config.yaml'. Returning empty config.
+[2026-04-04 23:34:24] INFO � Directories ensured: ['models/', 'logs/']
+[2026-04-04 23:34:24] INFO � =======================================================
+[2026-04-04 23:34:24] INFO �   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-04 23:34:24] INFO � =======================================================
+[2026-04-04 23:34:24] INFO � Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-04 23:34:27] INFO � Step 1b: Cleaning infinity and NaN values from data...
+[2026-04-04 23:34:27] INFO � Removed 157 rows with inf/NaN values.
+[2026-04-04 23:34:27] INFO � Data shape after pipeline: (600180, 15)
+[2026-04-04 23:34:27] INFO � Columns available: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits', 'Company', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change', 'Next_Day_UP', 'Next_Day_Close']
+[2026-04-04 23:34:27] INFO � Step 2: Defining features and target...
+[2026-04-04 23:34:27] INFO � Features shape : (600180, 9)
+[2026-04-04 23:34:27] INFO � Target shape   : (600180,)
+[2026-04-04 23:34:27] INFO � Target preview : min=1.03, max=6509.35, mean=140.34
+[2026-04-04 23:34:27] INFO � Step 3: Splitting data (80% train / 20% test)...
+[2026-04-04 23:34:27] INFO � Train size : 480144 rows
+[2026-04-04 23:34:27] INFO � Test size  : 120036 rows
+[2026-04-04 23:34:27] INFO � Step 4: Training Model 1 � Linear Regression...
+[2026-04-04 23:34:28] INFO �    MAE      : 1.7202   (avg error in $ price)
+[2026-04-04 23:34:28] INFO �    RMSE     : 3.4505  (penalizes large errors)
+[2026-04-04 23:34:28] INFO �    R� Score : 0.999   (1.0 = perfect fit)
+[2026-04-04 23:34:28] INFO � Linear Regression training complete.
+[2026-04-04 23:34:28] INFO � Step 5: Training Model 2 � Random Forest Regressor...
+[2026-04-04 23:34:28] INFO � (This may take 1-2 minutes on 600K rows...)
+[2026-04-04 23:39:03] INFO �    MAE      : 1.8031   (avg error in $ price)
+[2026-04-04 23:39:03] INFO �    RMSE     : 3.607  (penalizes large errors)
+[2026-04-04 23:39:03] INFO �    R� Score : 0.9989   (1.0 = perfect fit)
+[2026-04-04 23:39:03] INFO � Random Forest training complete.
+[2026-04-04 23:39:03] INFO � Step 6: Training Model 3 � XGBoost Regressor...
+[2026-04-04 23:39:06] INFO �    MAE      : 2.2597   (avg error in $ price)
+[2026-04-04 23:39:06] INFO �    RMSE     : 6.252  (penalizes large errors)
+[2026-04-04 23:39:06] INFO �    R� Score : 0.9967   (1.0 = perfect fit)
+[2026-04-04 23:39:06] INFO � XGBoost training complete.
+[2026-04-04 23:39:06] INFO � Step 7: Comparing all 3 models...
+[2026-04-04 23:39:06] INFO � Model comparison table generated.
+[2026-04-04 23:39:06] INFO � Step 8: Saving the best model...
+[2026-04-04 23:39:06] INFO � Model saved to 'models/model_v1.pkl'
+[2026-04-04 23:39:06] INFO � Best model     : Linear Regression
+[2026-04-04 23:39:06] INFO � Saved to       : models/model_v1.pkl
+[2026-04-04 23:39:06] INFO � R� Score       : 0.999
+[2026-04-04 23:54:05] WARNING — Config file not found at 'config.yaml'. Returning empty config.
+[2026-04-04 23:54:05] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-04 23:54:05] INFO — =======================================================
+[2026-04-04 23:54:05] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-04 23:54:05] INFO — =======================================================
+[2026-04-04 23:54:05] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-04 23:54:07] INFO — Step 1b: Cleaning infinity and NaN values from data...
+[2026-04-04 23:54:07] INFO — Removed 157 rows with inf/NaN values.
+[2026-04-04 23:54:07] INFO — Data shape after pipeline: (600180, 15)
+[2026-04-04 23:54:07] INFO — Columns available: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits', 'Company', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change', 'Next_Day_UP', 'Next_Day_Close']
+[2026-04-04 23:54:07] INFO — Step 2: Defining features and target...
+[2026-04-04 23:54:07] INFO — Features shape : (600180, 9)
+[2026-04-04 23:54:07] INFO — Target shape   : (600180,)
+[2026-04-04 23:54:07] INFO — Target preview : min=1.03, max=6509.35, mean=140.34
+[2026-04-04 23:54:07] INFO — Step 3: Splitting data (80% train / 20% test)...
+[2026-04-04 23:54:07] INFO — Train size : 480144 rows
+[2026-04-04 23:54:07] INFO — Test size  : 120036 rows
+[2026-04-04 23:54:07] INFO — Step 4: Training Model 1 — Linear Regression...
+[2026-04-04 23:54:07] INFO — ── Linear Regression Metrics ====================
+[2026-04-04 23:54:07] INFO —    MAE      : 1.7202   (avg error in $ price)
+[2026-04-04 23:54:07] INFO —    RMSE     : 3.4505  (penalizes large errors)
+[2026-04-04 23:54:07] INFO —    R² Score : 0.999   (1.0 = perfect fit)
+[2026-04-04 23:54:07] INFO — ──────────────────────────────────────────────────
+[2026-04-04 23:54:07] INFO — Linear Regression training complete.
+[2026-04-04 23:54:07] INFO — Step 5: Training Model 2 — Random Forest Regressor...
+[2026-04-04 23:54:07] INFO — (This may take 1-2 minutes on 600K rows...)
+[2026-04-04 23:56:19] INFO — ── Random Forest Regressor Metrics ====================
+[2026-04-04 23:56:19] INFO —    MAE      : 1.8031   (avg error in $ price)
+[2026-04-04 23:56:19] INFO —    RMSE     : 3.607  (penalizes large errors)
+[2026-04-04 23:56:19] INFO —    R² Score : 0.9989   (1.0 = perfect fit)
+[2026-04-04 23:56:19] INFO — ──────────────────────────────────────────────────
+[2026-04-04 23:56:19] INFO — Random Forest training complete.
+[2026-04-04 23:56:19] INFO — Step 6: Training Model 3 — XGBoost Regressor...
+[2026-04-04 23:56:21] INFO — ── XGBoost Regressor Metrics ====================
+[2026-04-04 23:56:21] INFO —    MAE      : 2.2597   (avg error in $ price)
+[2026-04-04 23:56:21] INFO —    RMSE     : 6.252  (penalizes large errors)
+[2026-04-04 23:56:21] INFO —    R² Score : 0.9967   (1.0 = perfect fit)
+[2026-04-04 23:56:21] INFO — ──────────────────────────────────────────────────
+[2026-04-04 23:56:21] INFO — XGBoost training complete.
+[2026-04-04 23:56:21] INFO — Step 7: Comparing all 3 models...
+[2026-04-04 23:56:21] INFO — Model comparison table generated.
+[2026-04-04 23:56:21] INFO — Step 8: Saving the best model...
+[2026-04-04 23:56:21] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-04 23:56:21] INFO — Best model     : Linear Regression
+[2026-04-04 23:56:21] INFO — Saved to       : models/model_v1.pkl
+[2026-04-04 23:56:21] INFO — R² Score       : 0.999
+[2026-04-05 00:31:37] WARNING — Config file not found at 'config.yaml'. Returning empty config.
+[2026-04-05 00:31:37] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 00:31:38] INFO — =======================================================
+[2026-04-05 00:31:38] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 00:31:38] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 00:31:38] INFO —   Target : Next Day Closing Price
+[2026-04-05 00:31:38] INFO — =======================================================
+[2026-04-05 00:31:38] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 00:31:39] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-05 00:31:39] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-05 00:31:39] INFO — Step 2: Defining features and target...
+[2026-04-05 00:31:39] INFO — Features (8): ['Open', 'High', 'Low', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-05 00:31:39] INFO — Target              : Next_Day_Close
+[2026-04-05 00:31:39] INFO — X shape             : (600180, 8)
+[2026-04-05 00:31:39] INFO — y shape             : (600180,)
+[2026-04-05 00:31:39] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-05 00:31:39] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-05 00:31:39] INFO — Train size : 480144 rows
+[2026-04-05 00:31:39] INFO — Test size  : 120036 rows
+[2026-04-05 00:31:39] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-05 00:31:39] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-05 00:33:34] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-05 00:33:34] INFO —    MAE      : 1.8031   (avg error in $ price)
+[2026-04-05 00:33:34] INFO —    RMSE     : 3.589  (penalizes large errors more)
+[2026-04-05 00:33:34] INFO —    R2 Score : 0.9989   (1.0 = perfect fit)
+[2026-04-05 00:33:34] INFO — --------------------------------------------------
+[2026-04-05 00:33:34] INFO — Random Forest training complete.
+[2026-04-05 00:33:34] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-05 00:33:35] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-05 00:33:35] INFO —    MAE      : 2.3158   (avg error in $ price)
+[2026-04-05 00:33:35] INFO —    RMSE     : 7.44  (penalizes large errors more)
+[2026-04-05 00:33:35] INFO —    R2 Score : 0.9954   (1.0 = perfect fit)
+[2026-04-05 00:33:35] INFO — --------------------------------------------------
+[2026-04-05 00:33:35] INFO — XGBoost training complete.
+[2026-04-05 00:33:35] INFO — Step 6: Comparing both models...
+[2026-04-05 00:33:35] INFO — Model comparison table generated.
+[2026-04-05 00:33:35] INFO — Step 7: Saving the best model...
+[2026-04-05 00:33:49] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-05 00:33:49] INFO — Best model : Random Forest Regressor
+[2026-04-05 00:33:49] INFO — Saved to   : models/model_v1.pkl
+[2026-04-05 00:33:49] INFO — R2 Score   : 0.9989
+[2026-04-05 00:40:04] WARNING — Config file not found at 'config.yaml'. Returning empty config.
+[2026-04-05 00:40:04] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 00:40:04] INFO — =======================================================
+[2026-04-05 00:40:04] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 00:40:04] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 00:40:04] INFO —   Target : Next Day Closing Price
+[2026-04-05 00:40:04] INFO — =======================================================
+[2026-04-05 00:40:04] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 00:40:05] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-05 00:40:05] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-05 00:40:05] INFO — Step 2: Defining features and target...
+[2026-04-05 00:40:05] INFO — Features (8): ['Open', 'High', 'Low', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-05 00:40:05] INFO — Target              : Next_Day_Close
+[2026-04-05 00:40:05] INFO — X shape             : (600180, 8)
+[2026-04-05 00:40:05] INFO — y shape             : (600180,)
+[2026-04-05 00:40:05] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-05 00:40:05] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-05 00:40:05] INFO — Train size : 480144 rows
+[2026-04-05 00:40:05] INFO — Test size  : 120036 rows
+[2026-04-05 00:40:05] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-05 00:40:05] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-05 00:42:05] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-05 00:42:05] INFO —    MAE      : 1.8031   (avg error in $ price)
+[2026-04-05 00:42:05] INFO —    RMSE     : 3.589  (penalizes large errors more)
+[2026-04-05 00:42:05] INFO —    R2 Score : 0.9989   (1.0 = perfect fit)
+[2026-04-05 00:42:05] INFO — --------------------------------------------------
+[2026-04-05 00:42:05] INFO — Random Forest training complete.
+[2026-04-05 00:42:05] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-05 00:42:07] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-05 00:42:07] INFO —    MAE      : 2.3158   (avg error in $ price)
+[2026-04-05 00:42:07] INFO —    RMSE     : 7.44  (penalizes large errors more)
+[2026-04-05 00:42:07] INFO —    R2 Score : 0.9954   (1.0 = perfect fit)
+[2026-04-05 00:42:07] INFO — --------------------------------------------------
+[2026-04-05 00:42:07] INFO — XGBoost training complete.
+[2026-04-05 00:42:07] INFO — Step 6: Comparing both models...
+[2026-04-05 00:42:07] INFO — Model comparison table generated.
+[2026-04-05 00:42:07] INFO — Step 7: Saving the best model...
+[2026-04-05 00:42:17] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-05 00:42:17] INFO — Best model : Random Forest Regressor
+[2026-04-05 00:42:17] INFO — Saved to   : models/model_v1.pkl
+[2026-04-05 00:42:17] INFO — R2 Score   : 0.9989
+[2026-04-05 00:55:52] INFO — Config loaded from 'config.yaml'
+[2026-04-05 00:55:52] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 00:55:52] INFO — =======================================================
+[2026-04-05 00:55:52] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 00:55:52] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 00:55:52] INFO —   Target : Next Day Closing Price
+[2026-04-05 00:55:52] INFO — =======================================================
+[2026-04-05 00:55:52] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 00:55:53] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-05 00:55:53] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-05 00:55:53] INFO — Step 2: Defining features and target...
+[2026-04-05 00:55:53] INFO — Features (8): ['Open', 'High', 'Low', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-05 00:55:53] INFO — Target              : Next_Day_Close
+[2026-04-05 00:55:53] INFO — X shape             : (600180, 8)
+[2026-04-05 00:55:53] INFO — y shape             : (600180,)
+[2026-04-05 00:55:53] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-05 00:55:53] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-05 00:55:53] INFO — Train size : 480144 rows
+[2026-04-05 00:55:53] INFO — Test size  : 120036 rows
+[2026-04-05 00:55:53] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-05 00:55:53] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-05 00:57:45] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-05 00:57:45] INFO —    MAE      : 1.8031   (avg error in $ price)
+[2026-04-05 00:57:45] INFO —    RMSE     : 3.589  (penalizes large errors more)
+[2026-04-05 00:57:45] INFO —    R2 Score : 0.9989   (1.0 = perfect fit)
+[2026-04-05 00:57:45] INFO — --------------------------------------------------
+[2026-04-05 00:57:45] INFO — Random Forest training complete.
+[2026-04-05 00:57:45] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-05 00:57:46] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-05 00:57:46] INFO —    MAE      : 2.3158   (avg error in $ price)
+[2026-04-05 00:57:46] INFO —    RMSE     : 7.44  (penalizes large errors more)
+[2026-04-05 00:57:46] INFO —    R2 Score : 0.9954   (1.0 = perfect fit)
+[2026-04-05 00:57:46] INFO — --------------------------------------------------
+[2026-04-05 00:57:46] INFO — XGBoost training complete.
+[2026-04-05 00:57:46] INFO — Step 6: Comparing both models...
+[2026-04-05 00:57:46] INFO — Model comparison table generated.
+[2026-04-05 00:57:46] INFO — Step 7: Saving the best model...
+[2026-04-05 00:58:04] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-05 00:58:04] INFO — Best model : Random Forest Regressor
+[2026-04-05 00:58:04] INFO — Saved to   : models/model_v1.pkl
+[2026-04-05 00:58:04] INFO — R2 Score   : 0.9989
+[2026-04-05 01:06:34] INFO — Config loaded from 'config.yaml'
+[2026-04-05 01:06:34] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 01:06:34] INFO — =======================================================
+[2026-04-05 01:06:34] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 01:06:34] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 01:06:34] INFO —   Target : Next Day Closing Price
+[2026-04-05 01:06:34] INFO — =======================================================
+[2026-04-05 01:06:34] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 01:06:35] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-05 01:06:35] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-05 01:06:35] INFO — Step 2: Defining features and target...
+[2026-04-05 01:06:35] INFO — Features (8): ['Open', 'High', 'Low', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-05 01:06:35] INFO — Target              : Next_Day_Close
+[2026-04-05 01:06:35] INFO — X shape             : (600180, 8)
+[2026-04-05 01:06:35] INFO — y shape             : (600180,)
+[2026-04-05 01:06:35] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-05 01:06:35] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-05 01:06:35] INFO — Train size : 480144 rows
+[2026-04-05 01:06:35] INFO — Test size  : 120036 rows
+[2026-04-05 01:06:35] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-05 01:06:35] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-05 01:08:33] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-05 01:08:33] INFO —    MAE      : 1.8031   (avg error in $ price)
+[2026-04-05 01:08:33] INFO —    RMSE     : 3.589  (penalizes large errors more)
+[2026-04-05 01:08:33] INFO —    R2 Score : 0.9989   (1.0 = perfect fit)
+[2026-04-05 01:08:33] INFO — --------------------------------------------------
+[2026-04-05 01:08:33] INFO — Random Forest training complete.
+[2026-04-05 01:08:33] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-05 01:08:35] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-05 01:08:35] INFO —    MAE      : 2.3158   (avg error in $ price)
+[2026-04-05 01:08:35] INFO —    RMSE     : 7.44  (penalizes large errors more)
+[2026-04-05 01:08:35] INFO —    R2 Score : 0.9954   (1.0 = perfect fit)
+[2026-04-05 01:08:35] INFO — --------------------------------------------------
+[2026-04-05 01:08:35] INFO — XGBoost training complete.
+[2026-04-05 01:08:35] INFO — Step 6: Comparing both models...
+[2026-04-05 01:08:35] INFO — Model comparison table generated.
+[2026-04-05 01:08:35] INFO — Step 7: Saving the best model...
+[2026-04-05 01:08:44] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-05 01:08:44] INFO — Best model : Random Forest Regressor
+[2026-04-05 01:08:44] INFO — Saved to   : models/model_v1.pkl
+[2026-04-05 01:08:44] INFO — R2 Score   : 0.9989
+[2026-04-05 01:09:18] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-05 01:09:18] INFO — =======================================================
+[2026-04-05 01:09:18] INFO —   MODEL EVALUATION PIPELINE
+[2026-04-05 01:09:18] INFO —   Loading saved model and evaluating on test data
+[2026-04-05 01:09:18] INFO — =======================================================
+[2026-04-05 01:09:18] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-05 01:09:25] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 01:09:25] INFO — Model loaded: RandomForestRegressor
+[2026-04-05 01:09:25] INFO — Step 2: Running pipeline to rebuild data...
+[2026-04-05 01:09:27] INFO — Clean data shape: (600180, 15)
+[2026-04-05 01:09:27] INFO — Step 3: Recreating train/test split (same as train.py)...
+[2026-04-05 01:09:27] INFO — Test set size: 120036 rows
+[2026-04-05 01:09:27] INFO — Step 4: Generating predictions and computing metrics...
+[2026-04-05 01:09:28] INFO — -------------------------------------------------------
+[2026-04-05 01:09:28] INFO —   Model         : RandomForestRegressor
+[2026-04-05 01:09:28] INFO —   Test samples  : 120036
+[2026-04-05 01:09:28] INFO —   MAE           : 1.8031  (avg $ error per prediction)
+[2026-04-05 01:09:28] INFO —   RMSE          : 3.589 (error penalizing big mistakes)
+[2026-04-05 01:09:28] INFO —   R2 Score      : 0.9989  (1.0 = perfect)
+[2026-04-05 01:09:28] INFO — -------------------------------------------------------
+[2026-04-05 01:09:28] INFO — Step 5: Generating Actual vs Predicted plot...
+[2026-04-05 01:09:29] INFO — Plots saved to 'outputs/evaluation_plots.png'
+[2026-04-05 01:17:17] INFO — Config loaded from 'config.yaml'
+[2026-04-05 01:17:17] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 01:17:17] INFO — =======================================================
+[2026-04-05 01:17:17] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 01:17:17] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 01:17:17] INFO —   Target : Next Day Closing Price
+[2026-04-05 01:17:17] INFO — =======================================================
+[2026-04-05 01:17:17] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 01:17:18] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-05 01:17:19] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-05 01:17:19] INFO — Step 2: Defining features and target...
+[2026-04-05 01:17:19] INFO — Features (8): ['Open', 'High', 'Low', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-05 01:17:19] INFO — Target              : Next_Day_Close
+[2026-04-05 01:17:19] INFO — X shape             : (600180, 8)
+[2026-04-05 01:17:19] INFO — y shape             : (600180,)
+[2026-04-05 01:17:19] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-05 01:17:19] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-05 01:17:19] INFO — Train size : 480144 rows
+[2026-04-05 01:17:19] INFO — Test size  : 120036 rows
+[2026-04-05 01:17:19] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-05 01:17:19] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-05 01:19:21] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-05 01:19:21] INFO —    MAE      : 1.8031   (avg error in $ price)
+[2026-04-05 01:19:21] INFO —    RMSE     : 3.589  (penalizes large errors more)
+[2026-04-05 01:19:21] INFO —    R2 Score : 0.9989   (1.0 = perfect fit)
+[2026-04-05 01:19:21] INFO — --------------------------------------------------
+[2026-04-05 01:19:21] INFO — Random Forest training complete.
+[2026-04-05 01:19:21] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-05 01:19:23] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-05 01:19:23] INFO —    MAE      : 2.3158   (avg error in $ price)
+[2026-04-05 01:19:23] INFO —    RMSE     : 7.44  (penalizes large errors more)
+[2026-04-05 01:19:23] INFO —    R2 Score : 0.9954   (1.0 = perfect fit)
+[2026-04-05 01:19:23] INFO — --------------------------------------------------
+[2026-04-05 01:19:23] INFO — XGBoost training complete.
+[2026-04-05 01:19:23] INFO — Step 6: Comparing both models...
+[2026-04-05 01:19:23] INFO — Model comparison table generated.
+[2026-04-05 01:19:23] INFO — Step 7: Saving the best model...
+[2026-04-05 01:19:28] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-05 01:19:28] INFO — Best model : Random Forest Regressor
+[2026-04-05 01:19:28] INFO — Saved to   : models/model_v1.pkl
+[2026-04-05 01:19:28] INFO — R2 Score   : 0.9989
+[2026-04-05 01:20:12] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-05 01:20:12] INFO — =======================================================
+[2026-04-05 01:20:12] INFO —   MODEL EVALUATION PIPELINE
+[2026-04-05 01:20:12] INFO —   Loading saved model and evaluating on test data
+[2026-04-05 01:20:12] INFO — =======================================================
+[2026-04-05 01:20:12] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-05 01:20:19] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 01:20:19] INFO — Model loaded: RandomForestRegressor
+[2026-04-05 01:20:19] INFO — Step 2: Running pipeline to rebuild data...
+[2026-04-05 01:20:21] INFO — Clean data shape: (600180, 15)
+[2026-04-05 01:20:21] INFO — Step 3: Recreating train/test split (same as train.py)...
+[2026-04-05 01:20:21] INFO — Test set size: 120036 rows
+[2026-04-05 01:20:21] INFO — Step 4: Generating predictions and computing metrics...
+[2026-04-05 01:20:22] INFO — -------------------------------------------------------
+[2026-04-05 01:20:22] INFO —   Model         : RandomForestRegressor
+[2026-04-05 01:20:22] INFO —   Test samples  : 120036
+[2026-04-05 01:20:22] INFO —   MAE           : 1.8031  (avg $ error per prediction)
+[2026-04-05 01:20:22] INFO —   RMSE          : 3.589 (error penalizing big mistakes)
+[2026-04-05 01:20:22] INFO —   R2 Score      : 0.9989  (1.0 = perfect)
+[2026-04-05 01:20:22] INFO — -------------------------------------------------------
+[2026-04-05 01:20:22] INFO — Step 5: Generating Actual vs Predicted plot...
+[2026-04-05 01:20:22] INFO — Plots saved to 'outputs/evaluation_plots.png'
+[2026-04-05 01:20:35] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-05 01:20:35] INFO — =======================================================
+[2026-04-05 01:20:35] INFO —   STOCK PRICE PREDICTION PIPELINE
+[2026-04-05 01:20:35] INFO —   Predicting: Next Day Closing Price
+[2026-04-05 01:20:35] INFO — =======================================================
+[2026-04-05 01:20:35] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-05 01:20:41] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 01:20:41] INFO — Model loaded: RandomForestRegressor
+[2026-04-05 01:20:41] INFO — Step 2: Loading data from pipeline...
+[2026-04-05 01:20:43] INFO — Clean data shape: (600180, 15)
+[2026-04-05 01:20:43] INFO — Step 3: Predicting next day close for latest data per company...
+[2026-04-05 01:20:43] INFO — Predicting on 4910 rows across 491 companies...
+[2026-04-05 01:20:43] INFO — Step 4: Displaying prediction results...
+[2026-04-05 01:20:43] INFO — Step 5: Saving predictions to CSV...
+[2026-04-05 01:20:44] INFO — Predictions saved to 'outputs/predictions.csv'
+<<<<<<< Updated upstream
+[2026-04-05 12:07:43] INFO — Config loaded from 'config.yaml'
+[2026-04-05 12:07:43] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 12:07:43] INFO — =======================================================
+[2026-04-05 12:07:43] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 12:07:43] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 12:07:43] INFO —   Target : Next Day Closing Price
+[2026-04-05 12:07:43] INFO — =======================================================
+[2026-04-05 12:07:43] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 14:31:51] INFO — Config loaded from 'config.yaml'
+[2026-04-05 14:31:51] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-05 14:31:51] INFO — =======================================================
+[2026-04-05 14:31:51] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-05 14:31:51] INFO —   Models : Random Forest | XGBoost
+[2026-04-05 14:31:51] INFO —   Target : Next Day Closing Price
+[2026-04-05 14:31:51] INFO — =======================================================
+[2026-04-05 14:31:51] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-05 14:31:52] WARNING — 'Next_Day_Close' not in columns. Creating it as fallback.
+[2026-04-05 14:31:52] WARNING — Ask teammate to add this line in features.py:
+[2026-04-05 14:31:52] WARNING —   df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
+[2026-04-05 14:31:52] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-05 14:31:52] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-05 14:31:52] INFO — Step 2: Defining features and target...
+[2026-04-05 14:31:52] INFO — Features (8): ['Open', 'High', 'Low', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-05 14:31:52] INFO — Target              : Next_Day_Close
+[2026-04-05 14:31:52] INFO — X shape             : (600180, 8)
+[2026-04-05 14:31:52] INFO — y shape             : (600180,)
+[2026-04-05 14:31:52] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-05 14:31:52] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-05 14:31:52] INFO — Train size : 480144 rows
+[2026-04-05 14:31:52] INFO — Test size  : 120036 rows
+[2026-04-05 14:31:52] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-05 14:31:52] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-05 14:33:00] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-05 14:33:00] INFO —    MAE      : 1.8028   (avg error in $ price)
+[2026-04-05 14:33:00] INFO —    RMSE     : 3.5875  (penalizes large errors more)
+[2026-04-05 14:33:00] INFO —    R2 Score : 0.9989   (1.0 = perfect fit)
+[2026-04-05 14:33:00] INFO — --------------------------------------------------
+[2026-04-05 14:33:00] INFO — Random Forest training complete.
+[2026-04-05 14:33:00] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-05 14:33:02] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-05 14:33:02] INFO —    MAE      : 2.3402   (avg error in $ price)
+[2026-04-05 14:33:02] INFO —    RMSE     : 6.8389  (penalizes large errors more)
+[2026-04-05 14:33:02] INFO —    R2 Score : 0.9961   (1.0 = perfect fit)
+[2026-04-05 14:33:02] INFO — --------------------------------------------------
+[2026-04-05 14:33:02] INFO — XGBoost training complete.
+[2026-04-05 14:33:02] INFO — Step 6: Comparing both models...
+[2026-04-05 14:33:02] INFO — Model comparison table generated.
+[2026-04-05 14:33:02] INFO — Step 7: Saving the best model...
+[2026-04-05 14:33:06] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-05 14:33:06] INFO — Best model : Random Forest Regressor
+[2026-04-05 14:33:06] INFO — Saved to   : models/model_v1.pkl
+[2026-04-05 14:33:06] INFO — R2 Score   : 0.9989
+[2026-04-05 16:24:25] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-05 16:24:25] INFO — =======================================================
+[2026-04-05 16:24:25] INFO —   MODEL EVALUATION PIPELINE
+[2026-04-05 16:24:25] INFO —   Loading saved model and evaluating on test data
+[2026-04-05 16:24:25] INFO — =======================================================
+[2026-04-05 16:24:25] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-05 16:24:32] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 16:24:32] INFO — Model loaded: RandomForestRegressor
+[2026-04-05 16:24:32] INFO — Step 2: Running pipeline to rebuild data...
+[2026-04-05 16:24:32] WARNING — 'Next_Day_Close' not found. Creating it as fallback.
+[2026-04-05 16:24:33] INFO — Clean data shape: (600180, 15)
+[2026-04-05 16:24:33] INFO — Step 3: Recreating train/test split (same as train.py)...
+[2026-04-05 16:24:33] INFO — Test set size: 120036 rows
+[2026-04-05 16:24:33] INFO — Step 4: Generating predictions and computing metrics...
+[2026-04-05 16:24:33] INFO — -------------------------------------------------------
+[2026-04-05 16:24:33] INFO —   Model         : RandomForestRegressor
+[2026-04-05 16:24:33] INFO —   Test samples  : 120036
+[2026-04-05 16:24:33] INFO —   MAE           : 1.8028  (avg $ error per prediction)
+[2026-04-05 16:24:33] INFO —   RMSE          : 3.5875 (error penalizing big mistakes)
+[2026-04-05 16:24:33] INFO —   R2 Score      : 0.9989  (1.0 = perfect)
+[2026-04-05 16:24:33] INFO — -------------------------------------------------------
+[2026-04-05 16:24:33] INFO — Step 5: Generating Actual vs Predicted plot...
+[2026-04-05 16:24:34] INFO — Plots saved to 'outputs/evaluation_plots.png'
+[2026-04-05 16:25:07] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-05 16:25:07] INFO — =======================================================
+[2026-04-05 16:25:07] INFO —   STOCK PRICE PREDICTION PIPELINE
+[2026-04-05 16:25:07] INFO —   Predicting: Next Day Closing Price
+[2026-04-05 16:25:07] INFO — =======================================================
+[2026-04-05 16:25:07] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-05 16:25:14] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 16:25:14] INFO — Model loaded: RandomForestRegressor
+[2026-04-05 16:25:14] INFO — Step 2: Loading data from pipeline...
+[2026-04-05 16:25:15] INFO — Clean data shape: (600671, 14)
+[2026-04-05 16:25:15] INFO — Step 3: Predicting next day close for latest data per company...
+[2026-04-05 16:25:15] INFO — Predicting on 4910 rows across 491 companies...
+[2026-04-05 16:25:15] INFO — Step 4: Displaying prediction results...
+[2026-04-05 16:25:15] INFO — Step 5: Saving predictions to CSV...
+[2026-04-05 16:25:15] INFO — Predictions saved to 'outputs/predictions.csv'
+[2026-04-05 16:26:35] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-05 16:26:35] INFO — Model loaded at startup: RandomForestRegressor
+[2026-04-05 16:27:40] INFO — Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-05 16:27:40] INFO — Prediction: $151.75 | Direction: UP
+[2026-04-05 16:27:58] INFO — Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-05 16:27:58] INFO — Prediction: $151.75 | Direction: UP
+=======
+[2026-04-09 15:35:02] INFO — Config loaded from 'config.yaml'
+[2026-04-09 15:35:02] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-09 15:35:02] INFO — =======================================================
+[2026-04-09 15:35:02] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-09 15:35:02] INFO —   Models : Random Forest | XGBoost
+[2026-04-09 15:35:02] INFO —   Target : Next Day Closing Price
+[2026-04-09 15:35:02] INFO — =======================================================
+[2026-04-09 15:35:02] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-09 15:35:05] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-09 15:35:05] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-09 15:35:05] INFO — Step 2: Defining features and target...
+[2026-04-09 15:35:05] INFO — Features (9): ['Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-09 15:35:05] INFO — Target              : Next_Day_Close
+[2026-04-09 15:35:05] INFO — X shape             : (600180, 9)
+[2026-04-09 15:35:05] INFO — y shape             : (600180,)
+[2026-04-09 15:35:05] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-09 15:35:05] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-09 15:35:05] INFO — Train size : 500150 rows
+[2026-04-09 15:35:05] INFO — Test size  : 100030 rows
+[2026-04-09 15:35:05] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-09 15:35:05] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-09 15:39:20] INFO — Config loaded from 'config.yaml'
+[2026-04-09 15:39:20] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-09 15:39:20] INFO — =======================================================
+[2026-04-09 15:39:20] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-09 15:39:20] INFO —   Models : Random Forest | XGBoost
+[2026-04-09 15:39:20] INFO —   Target : Next Day Closing Price
+[2026-04-09 15:39:20] INFO — =======================================================
+[2026-04-09 15:39:20] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-09 15:39:23] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-09 15:39:23] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-09 15:39:23] INFO — Step 2: Defining features and target...
+[2026-04-09 15:39:23] INFO — Features (9): ['Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-09 15:39:23] INFO — Target              : Next_Day_Close
+[2026-04-09 15:39:23] INFO — X shape             : (600180, 9)
+[2026-04-09 15:39:23] INFO — y shape             : (600180,)
+[2026-04-09 15:39:23] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-09 15:39:23] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-09 15:39:23] INFO — Train size : 500150 rows
+[2026-04-09 15:39:23] INFO — Test size  : 100030 rows
+[2026-04-09 15:39:23] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-09 15:39:23] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-09 15:44:20] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-09 15:44:20] INFO —    MAE      : 1.7374   (avg error in $ price)
+[2026-04-09 15:44:20] INFO —    RMSE     : 3.5377  (penalizes large errors more)
+[2026-04-09 15:44:20] INFO —    R2 Score : 0.999   (1.0 = perfect fit)
+[2026-04-09 15:44:20] INFO — --------------------------------------------------
+[2026-04-09 15:44:20] INFO — Random Forest training complete.
+[2026-04-09 15:44:20] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-09 15:44:23] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-09 15:44:23] INFO —    MAE      : 2.1979   (avg error in $ price)
+[2026-04-09 15:44:23] INFO —    RMSE     : 6.469  (penalizes large errors more)
+[2026-04-09 15:44:23] INFO —    R2 Score : 0.9966   (1.0 = perfect fit)
+[2026-04-09 15:44:23] INFO — --------------------------------------------------
+[2026-04-09 15:44:23] INFO — XGBoost training complete.
+[2026-04-09 15:44:23] INFO — Step 6: Comparing both models...
+[2026-04-09 15:44:23] INFO — Model comparison table generated.
+[2026-04-09 15:44:23] INFO — Step 7: Saving the best model...
+[2026-04-09 15:44:40] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-09 15:44:40] INFO — Best model : Random Forest Regressor
+[2026-04-09 15:44:40] INFO — Saved to   : models/model_v1.pkl
+[2026-04-09 15:44:40] INFO — R2 Score   : 0.999
+[2026-04-09 15:54:26] INFO — Config loaded from 'config.yaml'
+[2026-04-09 15:54:26] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-09 15:54:26] INFO — =======================================================
+[2026-04-09 15:54:26] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-09 15:54:26] INFO —   Models : Random Forest | XGBoost
+[2026-04-09 15:54:26] INFO —   Target : Next Day Closing Price
+[2026-04-09 15:54:26] INFO — =======================================================
+[2026-04-09 15:54:26] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-09 15:54:29] WARNING — 'Next_Day_Close' not in columns. Creating it as fallback.
+[2026-04-09 15:54:29] WARNING — Ask teammate to add this line in features.py:
+[2026-04-09 15:54:29] WARNING —   df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
+[2026-04-09 15:54:30] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-09 15:54:30] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-09 15:54:30] INFO — Step 2: Defining features and target...
+[2026-04-09 15:54:30] INFO — Features (9): ['Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-09 15:54:30] INFO — Target              : Next_Day_Close
+[2026-04-09 15:54:30] INFO — X shape             : (600180, 9)
+[2026-04-09 15:54:30] INFO — y shape             : (600180,)
+[2026-04-09 15:54:30] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-09 15:54:30] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-09 15:54:30] INFO — Train size : 500150 rows
+[2026-04-09 15:54:30] INFO — Test size  : 100030 rows
+[2026-04-09 15:54:30] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-09 15:54:30] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-09 15:58:24] INFO — Config loaded from 'config.yaml'
+[2026-04-09 15:58:24] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-09 15:58:24] INFO — =======================================================
+[2026-04-09 15:58:24] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-09 15:58:24] INFO —   Models : Random Forest | XGBoost
+[2026-04-09 15:58:24] INFO —   Target : Next Day Closing Price
+[2026-04-09 15:58:24] INFO — =======================================================
+[2026-04-09 15:58:24] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-09 15:58:27] WARNING — 'Next_Day_Close' not in columns. Creating it as fallback.
+[2026-04-09 15:58:27] WARNING — Ask teammate to add this line in features.py:
+[2026-04-09 15:58:27] WARNING —   df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
+[2026-04-09 15:58:27] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-09 15:58:28] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-09 15:58:28] INFO — Step 2: Defining features and target...
+[2026-04-09 15:58:28] INFO — Features (9): ['Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-09 15:58:28] INFO — Target              : Next_Day_Close
+[2026-04-09 15:58:28] INFO — X shape             : (600180, 9)
+[2026-04-09 15:58:28] INFO — y shape             : (600180,)
+[2026-04-09 15:58:28] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-09 15:58:28] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-09 15:58:28] INFO — Train size : 500150 rows
+[2026-04-09 15:58:28] INFO — Test size  : 100030 rows
+[2026-04-09 15:58:28] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-09 15:58:28] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-09 16:02:58] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-09 16:02:58] INFO —    MAE      : 1.737   (avg error in $ price)
+[2026-04-09 16:02:58] INFO —    RMSE     : 3.539  (penalizes large errors more)
+[2026-04-09 16:02:58] INFO —    R2 Score : 0.999   (1.0 = perfect fit)
+[2026-04-09 16:02:58] INFO — --------------------------------------------------
+[2026-04-09 16:02:58] INFO — Random Forest training complete.
+[2026-04-09 16:02:58] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-09 16:03:00] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-09 16:03:00] INFO —    MAE      : 2.1589   (avg error in $ price)
+[2026-04-09 16:03:00] INFO —    RMSE     : 6.3875  (penalizes large errors more)
+[2026-04-09 16:03:00] INFO —    R2 Score : 0.9967   (1.0 = perfect fit)
+[2026-04-09 16:03:00] INFO — --------------------------------------------------
+[2026-04-09 16:03:00] INFO — XGBoost training complete.
+[2026-04-09 16:03:00] INFO — Step 6: Comparing both models...
+[2026-04-09 16:03:00] INFO — Model comparison table generated.
+[2026-04-09 16:03:00] INFO — Step 7: Saving the best model...
+[2026-04-09 16:03:07] INFO — Config loaded from 'config.yaml'
+[2026-04-09 16:03:07] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-09 16:03:07] INFO — =======================================================
+[2026-04-09 16:03:07] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-09 16:03:07] INFO —   Models : Random Forest | XGBoost
+[2026-04-09 16:03:07] INFO —   Target : Next Day Closing Price
+[2026-04-09 16:03:07] INFO — =======================================================
+[2026-04-09 16:03:07] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-09 16:03:09] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-09 16:03:09] INFO — Best model : Random Forest Regressor
+[2026-04-09 16:03:09] INFO — Saved to   : models/model_v1.pkl
+[2026-04-09 16:03:09] INFO — R2 Score   : 0.999
+[2026-04-09 16:03:10] WARNING — 'Next_Day_Close' not in columns. Creating it as fallback.
+[2026-04-09 16:03:10] WARNING — Ask teammate to add this line in features.py:
+[2026-04-09 16:03:10] WARNING —   df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
+[2026-04-09 16:03:11] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-09 16:03:11] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-09 16:03:11] INFO — Step 2: Defining features and target...
+[2026-04-09 16:03:11] INFO — Features (9): ['Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-09 16:03:11] INFO — Target              : Next_Day_Close
+[2026-04-09 16:03:11] INFO — X shape             : (600180, 9)
+[2026-04-09 16:03:11] INFO — y shape             : (600180,)
+[2026-04-09 16:03:11] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-09 16:03:11] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-09 16:03:11] INFO — Train size : 500150 rows
+[2026-04-09 16:03:11] INFO — Test size  : 100030 rows
+[2026-04-09 16:03:11] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-09 16:03:11] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-09 16:04:03] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-09 16:04:03] INFO — =======================================================
+[2026-04-09 16:04:03] INFO —   STOCK PRICE PREDICTION PIPELINE
+[2026-04-09 16:04:03] INFO —   Predicting: Next Day Closing Price
+[2026-04-09 16:04:03] INFO — =======================================================
+[2026-04-09 16:04:03] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-09 16:04:25] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-09 16:04:25] INFO — Model loaded: RandomForestRegressor
+[2026-04-09 16:04:25] INFO — Step 2: Loading data from pipeline...
+[2026-04-09 16:04:30] INFO — Clean data shape: (600671, 14)
+[2026-04-09 16:04:30] INFO — Step 3: Predicting next day close for latest data per company...
+[2026-04-09 16:04:30] INFO — Predicting on 4910 rows across 491 companies...
+[2026-04-09 16:08:59] INFO — Config loaded from 'config.yaml'
+[2026-04-09 16:08:59] INFO — Directories ensured: ['models/', 'logs/']
+[2026-04-09 16:08:59] INFO — =======================================================
+[2026-04-09 16:08:59] INFO —   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-09 16:08:59] INFO —   Models : Random Forest | XGBoost
+[2026-04-09 16:08:59] INFO —   Target : Next Day Closing Price
+[2026-04-09 16:08:59] INFO — =======================================================
+[2026-04-09 16:08:59] INFO — Step 1: Running pipeline (load -> preprocess -> features)...
+[2026-04-09 16:09:02] INFO — Step 1b: Cleaning infinity and NaN values...
+[2026-04-09 16:09:02] INFO — Removed 157 bad rows. Clean shape: (600180, 15)
+[2026-04-09 16:09:02] INFO — Step 2: Defining features and target...
+[2026-04-09 16:09:02] INFO — Features (9): ['Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change']
+[2026-04-09 16:09:02] INFO — Target              : Next_Day_Close
+[2026-04-09 16:09:02] INFO — X shape             : (600180, 9)
+[2026-04-09 16:09:02] INFO — y shape             : (600180,)
+[2026-04-09 16:09:02] INFO — y range             : min=1.03, max=6509.35, mean=140.34
+[2026-04-09 16:09:02] INFO — Step 3: Splitting data (80% train / 20% test, no shuffle)...
+[2026-04-09 16:09:02] INFO — Train size : 500150 rows
+[2026-04-09 16:09:02] INFO — Test size  : 100030 rows
+[2026-04-09 16:09:02] INFO — Step 4: Training Model 1 - Random Forest Regressor...
+[2026-04-09 16:09:02] INFO — (May take 2-3 minutes on 480K rows...)
+[2026-04-09 16:13:49] INFO — -- Random Forest Regressor Metrics --------------------------
+[2026-04-09 16:13:49] INFO —    MAE      : 1.7374   (avg error in $ price)
+[2026-04-09 16:13:49] INFO —    RMSE     : 3.5377  (penalizes large errors more)
+[2026-04-09 16:13:49] INFO —    R2 Score : 0.999   (1.0 = perfect fit)
+[2026-04-09 16:13:49] INFO — --------------------------------------------------
+[2026-04-09 16:13:49] INFO — Random Forest training complete.
+[2026-04-09 16:13:49] INFO — Step 5: Training Model 2 - XGBoost Regressor...
+[2026-04-09 16:13:51] INFO — -- XGBoost Regressor Metrics --------------------------
+[2026-04-09 16:13:51] INFO —    MAE      : 2.1979   (avg error in $ price)
+[2026-04-09 16:13:51] INFO —    RMSE     : 6.469  (penalizes large errors more)
+[2026-04-09 16:13:51] INFO —    R2 Score : 0.9966   (1.0 = perfect fit)
+[2026-04-09 16:13:51] INFO — --------------------------------------------------
+[2026-04-09 16:13:51] INFO — XGBoost training complete.
+[2026-04-09 16:13:51] INFO — Step 6: Comparing both models...
+[2026-04-09 16:13:51] INFO — Model comparison table generated.
+[2026-04-09 16:13:51] INFO — Step 7: Saving the best model...
+[2026-04-09 16:14:01] INFO — Model saved to 'models/model_v1.pkl'
+[2026-04-09 16:14:01] INFO — Best model : Random Forest Regressor
+[2026-04-09 16:14:01] INFO — Saved to   : models/model_v1.pkl
+[2026-04-09 16:14:01] INFO — R2 Score   : 0.999
+[2026-04-09 16:17:28] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-09 16:17:28] INFO — =======================================================
+[2026-04-09 16:17:28] INFO —   STOCK PRICE PREDICTION PIPELINE
+[2026-04-09 16:17:28] INFO —   Predicting: Next Day Closing Price
+[2026-04-09 16:17:28] INFO — =======================================================
+[2026-04-09 16:17:28] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-09 16:17:34] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-09 16:17:34] INFO — Model loaded: RandomForestRegressor
+[2026-04-09 16:17:34] INFO — Step 2: Loading data from pipeline...
+[2026-04-09 16:17:35] INFO — Clean data shape: (600180, 15)
+[2026-04-09 16:17:35] INFO — Step 3: Predicting next day close for latest data per company...
+[2026-04-09 16:17:36] INFO — Predicting on 4910 rows across 491 companies...
+[2026-04-09 16:20:24] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-09 16:20:24] INFO — =======================================================
+[2026-04-09 16:20:24] INFO —   STOCK PRICE PREDICTION PIPELINE
+[2026-04-09 16:20:24] INFO —   Predicting: Next Day Closing Price
+[2026-04-09 16:20:24] INFO — =======================================================
+[2026-04-09 16:20:24] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-09 16:20:32] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-09 16:20:32] INFO — Model loaded: RandomForestRegressor
+[2026-04-09 16:20:32] INFO — Step 2: Loading data from pipeline...
+[2026-04-09 16:20:33] INFO — Clean data shape: (600180, 15)
+[2026-04-09 16:20:33] INFO — Step 3: Predicting next day close for latest data per company...
+[2026-04-09 16:20:33] INFO — Predicting on 4910 rows across 491 companies...
+[2026-04-09 16:20:33] ERROR — Missing feature columns: ['CloseVolume']
+[2026-04-09 16:21:53] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-09 16:21:53] INFO — =======================================================
+[2026-04-09 16:21:53] INFO —   STOCK PRICE PREDICTION PIPELINE
+[2026-04-09 16:21:53] INFO —   Predicting: Next Day Closing Price
+[2026-04-09 16:21:53] INFO — =======================================================
+[2026-04-09 16:21:53] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-09 16:21:59] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-09 16:21:59] INFO — Model loaded: RandomForestRegressor
+[2026-04-09 16:21:59] INFO — Step 2: Loading data from pipeline...
+[2026-04-09 16:22:01] INFO — Clean data shape: (600180, 15)
+[2026-04-09 16:22:01] INFO — Step 3: Predicting next day close for latest data per company...
+[2026-04-09 16:22:01] INFO — Predicting on 4910 rows across 491 companies...
+[2026-04-09 16:22:01] INFO — Step 4: Displaying prediction results...
+[2026-04-09 16:22:01] INFO — Step 5: Saving predictions to CSV...
+[2026-04-09 16:22:01] INFO — Predictions saved to 'outputs/predictions.csv'
+[2026-04-09 16:23:18] INFO — Directories ensured: ['logs/', 'outputs/']
+[2026-04-09 16:23:18] INFO — =======================================================
+[2026-04-09 16:23:18] INFO —   MODEL EVALUATION PIPELINE
+[2026-04-09 16:23:18] INFO —   Loading saved model and evaluating on test data
+[2026-04-09 16:23:18] INFO — =======================================================
+[2026-04-09 16:23:18] INFO — Step 1: Loading model from 'models/model_v1.pkl'...
+[2026-04-09 16:23:26] INFO — Model loaded from 'models/model_v1.pkl'
+[2026-04-09 16:23:26] INFO — Model loaded: RandomForestRegressor
+[2026-04-09 16:23:26] INFO — Step 2: Running pipeline to rebuild data...
+[2026-04-09 16:23:29] INFO — Clean data shape: (600180, 15)
+[2026-04-09 16:23:29] INFO — Step 3: Recreating train/test split (same as train.py)...
+[2026-04-09 16:23:30] INFO — Test set size: 100030 rows
+[2026-04-09 16:23:30] INFO — Step 4: Generating predictions and computing metrics...
+[2026-04-09 16:23:31] INFO — -------------------------------------------------------
+[2026-04-09 16:23:31] INFO —   Model         : RandomForestRegressor
+[2026-04-09 16:23:31] INFO —   Test samples  : 100030
+[2026-04-09 16:23:31] INFO —   MAE           : 1.7374  (avg $ error per prediction)
+[2026-04-09 16:23:31] INFO —   RMSE          : 3.5377 (error penalizing big mistakes)
+[2026-04-09 16:23:31] INFO —   R2 Score      : 0.999  (1.0 = perfect)
+[2026-04-09 16:23:31] INFO — -------------------------------------------------------
+[2026-04-09 16:23:31] INFO — Step 5: Generating Actual vs Predicted plot...
+[2026-04-09 16:23:32] INFO — Plots saved to 'outputs/evaluation_plots.png'
+>>>>>>> Stashed changes
+[2026-04-12 20:04:45] ERROR - Model file not found at 'models/model_v1.pkl'
+[2026-04-12 20:04:45] ERROR - Model not found at 'models/model_v1.pkl'. Run train.py first.
+[2026-04-12 20:05:09] INFO - Config loaded from 'config.yaml'
+[2026-04-12 20:05:09] INFO - Directories ensured: ['models/', 'logs/']
+[2026-04-12 20:05:10] INFO - =======================================================
+[2026-04-12 20:05:10] INFO -   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-12 20:05:10] INFO -   Models : Random Forest | XGBoost
+[2026-04-12 20:05:10] INFO -   Target : Next Day Closing Price
+[2026-04-12 20:05:10] INFO - =======================================================
+[2026-04-12 20:05:10] INFO - Removed 157 bad rows. Shape: (600180, 15)
+[2026-04-12 20:05:10] INFO - X shape: (600180, 9) | y range: 1.03 to 6509.35
+[2026-04-12 20:05:10] INFO - Train: 500,150 rows | Test: 100,030 rows
+[2026-04-12 20:05:10] INFO - Training Random Forest Regressor (2-3 mins)...
+[2026-04-12 20:06:36] INFO - -- Random Forest Regressor Metrics --------------------------
+[2026-04-12 20:06:36] INFO -    MAE      : 1.7374   (avg error in $ price)
+[2026-04-12 20:06:36] INFO -    RMSE     : 3.5377  (penalizes large errors more)
+[2026-04-12 20:06:36] INFO -    R2 Score : 0.999   (1.0 = perfect fit)
+[2026-04-12 20:06:36] INFO - --------------------------------------------------
+[2026-04-12 20:06:36] INFO - Random Forest training complete.
+[2026-04-12 20:06:36] INFO - Training XGBoost Regressor...
+[2026-04-12 20:06:37] INFO - -- XGBoost Regressor Metrics --------------------------
+[2026-04-12 20:06:37] INFO -    MAE      : 2.1979   (avg error in $ price)
+[2026-04-12 20:06:37] INFO -    RMSE     : 6.469  (penalizes large errors more)
+[2026-04-12 20:06:37] INFO -    R2 Score : 0.9966   (1.0 = perfect fit)
+[2026-04-12 20:06:37] INFO - --------------------------------------------------
+[2026-04-12 20:06:37] INFO - XGBoost training complete.
+[2026-04-12 20:06:37] INFO - Model comparison table generated.
+[2026-04-12 20:06:41] INFO - Model saved to 'models/model_v1.pkl'
+[2026-04-12 20:06:41] INFO - Best model : Random Forest Regressor
+[2026-04-12 20:06:41] INFO - Saved to   : models/model_v1.pkl
+[2026-04-12 20:06:41] INFO - R2 Score   : 0.999
+[2026-04-12 20:07:53] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-12 20:07:53] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-12 20:08:17] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-12 20:08:17] ERROR - Prediction failed: The feature names should match those that were passed during fit.
+Feature names seen at fit time, yet now missing:
+- Close
+
+[2026-04-12 20:10:47] INFO - Received prediction request: {'Open': 150.5, 'High': 153.2, 'Low': 148.3, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 4.9, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-12 20:10:47] ERROR - Prediction failed: The feature names should match those that were passed during fit.
+Feature names seen at fit time, yet now missing:
+- Close
+
+[2026-04-12 20:13:19] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-12 20:13:19] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-12 20:13:32] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 0.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-12 20:13:32] INFO - Prediction: $2.36 | Direction: DOWN
+[2026-04-13 20:47:48] INFO - Config loaded from 'config.yaml'
+[2026-04-13 20:47:48] INFO - Directories ensured: ['models/', 'logs/']
+[2026-04-13 20:47:49] INFO - =======================================================
+[2026-04-13 20:47:49] INFO -   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-13 20:47:49] INFO -   Models : Random Forest | XGBoost
+[2026-04-13 20:47:49] INFO -   Target : Next Day Closing Price
+[2026-04-13 20:47:49] INFO - =======================================================
+[2026-04-13 20:47:49] INFO - Removed 157 bad rows. Shape: (600180, 14)
+[2026-04-13 20:47:49] INFO - X shape: (600180, 9) | y range: 1.03 to 6509.35
+[2026-04-13 20:47:49] INFO - Train: 500,150 rows | Test: 100,030 rows
+[2026-04-13 20:47:49] INFO - Training Random Forest Regressor (2-3 mins)...
+[2026-04-13 20:49:11] INFO - -- Random Forest Regressor Metrics --------------------------
+[2026-04-13 20:49:11] INFO -    MAE      : 1.7374   (avg error in $ price)
+[2026-04-13 20:49:11] INFO -    RMSE     : 3.5377  (penalizes large errors more)
+[2026-04-13 20:49:11] INFO -    R2 Score : 0.999   (1.0 = perfect fit)
+[2026-04-13 20:49:11] INFO - --------------------------------------------------
+[2026-04-13 20:49:11] INFO - Random Forest training complete.
+[2026-04-13 20:49:11] INFO - Training XGBoost Regressor...
+[2026-04-13 20:49:12] INFO - -- XGBoost Regressor Metrics --------------------------
+[2026-04-13 20:49:12] INFO -    MAE      : 2.1979   (avg error in $ price)
+[2026-04-13 20:49:12] INFO -    RMSE     : 6.469  (penalizes large errors more)
+[2026-04-13 20:49:12] INFO -    R2 Score : 0.9966   (1.0 = perfect fit)
+[2026-04-13 20:49:12] INFO - --------------------------------------------------
+[2026-04-13 20:49:12] INFO - XGBoost training complete.
+[2026-04-13 20:49:12] INFO - Model comparison table generated.
+[2026-04-13 20:49:16] INFO - Model saved to 'models/model_v1.pkl'
+[2026-04-13 20:49:16] INFO - Best model : Random Forest Regressor
+[2026-04-13 20:49:16] INFO - Saved to   : models/model_v1.pkl
+[2026-04-13 20:49:16] INFO - R2 Score   : 0.999
+[2026-04-13 20:49:33] INFO - Directories ensured: ['logs/', 'outputs/']
+[2026-04-13 20:49:33] INFO - =======================================================
+[2026-04-13 20:49:33] INFO -   MODEL EVALUATION PIPELINE
+[2026-04-13 20:49:33] INFO -   Regression Metrics + Direction Confusion Matrix
+[2026-04-13 20:49:33] INFO - =======================================================
+[2026-04-13 20:49:39] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-13 20:49:39] INFO - Model: RandomForestRegressor
+[2026-04-13 20:49:40] INFO - Clean data shape: (600180, 14)
+[2026-04-13 20:49:40] INFO - Test set size: 100,030 rows
+[2026-04-13 20:49:41] INFO -   MAE: 1.7374 | RMSE: 3.5377 | R2: 0.999
+[2026-04-13 20:49:41] INFO -   Direction Accuracy: 0.504 (50.4%)
+[2026-04-13 20:49:41] INFO - 3 plots saved to 'outputs/evaluation_plots.png'
+[2026-04-13 20:50:22] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-13 20:50:22] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-13 20:50:54] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 0.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-13 20:50:54] INFO - Prediction: $2.36 | Direction: DOWN
+[2026-04-14 19:27:57] INFO - Config loaded from 'config.yaml'
+[2026-04-14 19:27:57] INFO - Directories ensured: ['models/', 'logs/']
+[2026-04-14 19:27:58] INFO - =======================================================
+[2026-04-14 19:27:58] INFO -   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-14 19:27:58] INFO -   Models : Random Forest | XGBoost
+[2026-04-14 19:27:58] INFO -   Target : Next Day Closing Price
+[2026-04-14 19:27:58] INFO - =======================================================
+[2026-04-14 19:27:58] INFO - Removed 0 bad rows. Shape: (600180, 14)
+[2026-04-14 19:27:58] INFO - X shape: (600180, 9) | y range: 1.03 to 6509.35
+[2026-04-14 19:27:59] INFO - Train: 500,150 rows | Test: 100,030 rows
+[2026-04-14 19:27:59] INFO - Training Random Forest Regressor (2-3 mins)...
+[2026-04-14 19:30:24] INFO - -- Random Forest Regressor Metrics --------------------------
+[2026-04-14 19:30:24] INFO -    MAE      : 1.7374   (avg error in $ price)
+[2026-04-14 19:30:24] INFO -    RMSE     : 3.5377  (penalizes large errors more)
+[2026-04-14 19:30:24] INFO -    R2 Score : 0.999   (1.0 = perfect fit)
+[2026-04-14 19:30:24] INFO - --------------------------------------------------
+[2026-04-14 19:30:24] INFO - Random Forest training complete.
+[2026-04-14 19:30:24] INFO - Training XGBoost Regressor...
+[2026-04-14 19:30:25] INFO - -- XGBoost Regressor Metrics --------------------------
+[2026-04-14 19:30:25] INFO -    MAE      : 2.1979   (avg error in $ price)
+[2026-04-14 19:30:25] INFO -    RMSE     : 6.469  (penalizes large errors more)
+[2026-04-14 19:30:25] INFO -    R2 Score : 0.9966   (1.0 = perfect fit)
+[2026-04-14 19:30:25] INFO - --------------------------------------------------
+[2026-04-14 19:30:25] INFO - XGBoost training complete.
+[2026-04-14 19:30:25] INFO - Model comparison table generated.
+[2026-04-14 19:30:36] INFO - Model saved to 'models/model_v1.pkl'
+[2026-04-14 19:30:36] INFO - Best model : Random Forest Regressor
+[2026-04-14 19:30:36] INFO - Saved to   : models/model_v1.pkl
+[2026-04-14 19:30:36] INFO - R2 Score   : 0.999
+[2026-04-14 19:30:53] INFO - Directories ensured: ['logs/', 'outputs/']
+[2026-04-14 19:30:53] INFO - =======================================================
+[2026-04-14 19:30:53] INFO -   STOCK PRICE PREDICTION PIPELINE
+[2026-04-14 19:30:53] INFO -   Predicting: Next Day Closing Price
+[2026-04-14 19:30:53] INFO - =======================================================
+[2026-04-14 19:31:09] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-14 19:31:09] INFO - Model loaded: RandomForestRegressor
+[2026-04-14 19:31:11] INFO - Clean data shape: (600180, 14)
+[2026-04-14 19:31:11] INFO - Predicting for 491 companies...
+[2026-04-14 19:31:11] INFO - Predictions saved to 'outputs/predictions.csv'
+[2026-04-14 19:33:12] INFO - Directories ensured: ['logs/', 'outputs/']
+[2026-04-14 19:33:12] INFO - =======================================================
+[2026-04-14 19:33:12] INFO -   MODEL EVALUATION PIPELINE
+[2026-04-14 19:33:12] INFO -   Regression Metrics + Direction Confusion Matrix
+[2026-04-14 19:33:12] INFO - =======================================================
+[2026-04-14 19:33:20] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-14 19:33:20] INFO - Model: RandomForestRegressor
+[2026-04-14 19:33:21] INFO - Clean data shape: (600180, 14)
+[2026-04-14 19:33:21] INFO - Test set size: 100,030 rows
+[2026-04-14 19:33:22] INFO -   MAE: 1.7374 | RMSE: 3.5377 | R2: 0.999
+[2026-04-14 19:33:22] INFO -   Direction Accuracy: 0.504 (50.4%)
+[2026-04-14 19:33:23] INFO - 3 plots saved to 'outputs/evaluation_plots.png'
+[2026-04-14 19:42:46] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-14 19:42:46] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-14 19:45:20] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 0.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-14 19:45:21] INFO - Prediction: $2.36 | Direction: DOWN
+[2026-04-14 19:46:54] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 0.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-14 19:46:54] INFO - Prediction: $2.36 | Direction: DOWN
+[2026-04-14 19:49:49] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 151.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-14 19:49:49] INFO - Prediction: $149.5 | Direction: DOWN
+[2026-04-14 23:07:52] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-14 23:07:52] INFO - Model loaded at startup: RandomForestRegressor
