@@ -26,7 +26,7 @@ The system:
 ## 🧠 Models Used
 
 | Model | Description |
-|------|------------|
+|-------|-------------|
 | Random Forest | Ensemble of decision trees, robust and interpretable |
 | XGBoost | Gradient boosting model, strong performance on tabular data |
 
@@ -50,10 +50,9 @@ project/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
-
 ```
-> ⚠️ Note: The model file is mounted into the container using Docker volumes and is not included in the repository due to GitHub file size limits.
 
+> ⚠️ The model file is mounted into the container using Docker volumes and is not included in the repository due to GitHub file size limits.
 
 ---
 
@@ -65,57 +64,58 @@ cd fsml-project-group-7
 pip install -r requirements.txt
 ```
 
+---
 
-📊 Dataset
+## 📊 Dataset
 
 The dataset is not included in this repository.
 
-Download it from: 
-data/dataset_link.txt
+- Download link: `data/dataset_link.txt`
+- Place the file at: `data/stock_details_5_years.csv`
 
-Place the file here: 
-data/stock_details_5_years.csv
+---
 
-🔄 Run the ML Pipeline
+## 🔄 Run the ML Pipeline
+
+```bash
 python pipeline/pipeline.py
+```
 
-This performs:
+This performs: data loading → preprocessing → feature engineering → model training → model selection.
 
-Data loading
-Preprocessing
-Feature engineering
-Model training
-Model selection
+**Output:** `models/model_v1.pkl`
 
-👉 Output:
+---
 
-models/model_v1.pkl
+## 🐳 Run with Docker
 
-🤖 Model File (Important)
+**Step 1 — Build the image**
 
-The trained model is not stored in GitHub due to file size limitations.
-
-To generate the model locally:
-
-python pipeline/pipeline.py
-
-🐳 Run with Docker
-Step 1 — Build Docker image
+```bash
 docker build -t stock-predictor .
-Step 2 — Run container (with model mount)
-docker run -p 8000:8000 -v D:/your-path/fsml-project-group-7/models:/app/models stock-predictor
+```
 
-⚠️ Replace D:/your-path/... with your actual local path.
+**Step 2 — Run the container**
 
-Step 3 — Access API
+```bash
+docker run -p 8000:8000 -v /your/local/path/models:/app/models stock-predictor
+```
 
-Open in browser:
+> ⚠️ Replace `/your/local/path/` with your actual path to the project folder.
 
-http://127.0.0.1:8000/docs
-🌐 API Usage
-Endpoint
-POST /predict
-Sample Input
+**Step 3 — Access the API**
+
+Open in your browser: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+---
+
+## 🌐 API Usage
+
+**Endpoint:** `POST /predict`
+
+**Sample Input:**
+
+```json
 {
   "Open": 150.0,
   "High": 155.0,
@@ -127,7 +127,11 @@ Sample Input
   "MA_5": 149.5,
   "Volume_Change": 0.05
 }
-Sample Output
+```
+
+**Sample Output:**
+
+```json
 {
   "predicted_next_close": 153.42,
   "current_close_approx": 150.0,
@@ -135,30 +139,24 @@ Sample Output
   "expected_change": 3.42,
   "model_used": "RandomForestRegressor"
 }
+```
 
-📊 Evaluation Metrics
+---
 
-The models are evaluated using:
+## 📊 Evaluation Metrics
 
-MAE (Mean Absolute Error)
-RMSE (Root Mean Squared Error)
-R² Score
+Models are evaluated using:
 
-Evaluation plots and results are stored in:
+- **MAE** — Mean Absolute Error
+- **RMSE** — Root Mean Squared Error
+- **R² Score**
 
-outputs/
+Plots and results are saved to `outputs/`.
 
-🧠 Key Features
-End-to-end ML pipeline
-Time-series aware data splitting
-Feature engineering (returns, moving averages, etc.)
-Automatic model comparison and selection
-FastAPI-based REST API
-Dockerized deployment
-External model handling (due to size constraints)
+---
 
-🏗️ System Architecture
-🔹 Overview
+## 🏗️ System Architecture
+
 ┌──────────────────────┐
 │   Stock Dataset      │
 │ (Yahoo Finance CSV)  │
@@ -194,58 +192,55 @@ External model handling (due to size constraints)
 │  http://localhost    │
 └──────────────────────┘
 
-![Architecture Diagram](https://raw.githubusercontent.com/ashishpatel26/fastapi-ml-deployment/main/architecture.png)
+---
 
-🔹 Flow Explanation
-Data is collected and processed using a custom pipeline
-Features like moving averages and returns are engineered
-Multiple models are trained and evaluated
-Best model is saved and used for inference
-FastAPI exposes prediction endpoint
-Docker ensures consistent deployment
+## 💡 Key Design Decision
 
-💡 Key Design Decision
+Due to GitHub file size limits, the trained model is generated locally and mounted into the Docker container at runtime. This ensures a lightweight repository, clean version control, and flexible deployment.
 
-Due to GitHub file size limits, the trained model is:
+---
 
-Generated locally
-Mounted into the Docker container at runtime
+## 👨‍💻 Tech Stack
 
-This ensures:
+- Python 3.12
+- Scikit-learn
+- XGBoost
+- FastAPI + Uvicorn
+- Docker
+- Pandas, NumPy
 
-Lightweight repository
-Scalable deployment
-Clean version control
+---
 
-👨‍💻 Tech Stack
-Python
-Scikit-learn
-XGBoost
-FastAPI
-Docker
-Pandas, NumPy
+## 📌 Quick Start Summary
 
-📌 How to Run (Quick Summary)
+```bash
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Train model
+# 2. Train the model
 python pipeline/pipeline.py
 
 # 3. Build Docker image
 docker build -t stock-predictor .
 
-# 4. Run container
-docker run -p 8000:8000 -v D:/path/models:/app/models stock-predictor
+# 4. Run container (update path)
+docker run -p 8000:8000 -v /your/local/path/models:/app/models stock-predictor
 
-# 5. Open API
-http://127.0.0.1:8000/docs
-🚀 Future Improvements
-Model optimization (LightGBM, smaller footprint)
-Cloud deployment (AWS/GCP)
-CI/CD pipeline integration
-Real-time stock data integration
+# 5. Open API docs
+# http://127.0.0.1:8000/docs
+```
 
-📄 License
+---
+
+## 🚀 Future Improvements
+
+- Model optimization (LightGBM, smaller footprint)
+- Cloud deployment (AWS / GCP)
+- Real-time stock data integration
+- Enhanced CI/CD pipeline
+
+---
+
+## 📄 License
 
 This project is for educational and research purposes.
