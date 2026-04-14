@@ -4,6 +4,7 @@
 # --- Python ---
 __pycache__/
 *.py[cod]
+pip-cache/
 *$py.class
 .venv/
 env/
@@ -29,5 +30,9 @@ logs/
 # --- Git ---
 .gitattributes
 
-# --- OS ---
+# --- MacOS ---
 .DS_Store
+
+# --- Model ---
+*.pkl
+*.log
