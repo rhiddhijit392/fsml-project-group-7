@@ -910,3 +910,7 @@ Feature names seen at fit time, yet now missing:
 [2026-04-14 19:49:26] INFO - Prediction: $144.49 | Direction: DOWN
 [2026-04-14 19:49:54] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 151.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
 [2026-04-14 19:49:54] INFO - Prediction: $149.5 | Direction: DOWN
+[2026-04-14 20:03:56] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-14 20:03:56] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-14 20:04:54] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-14 20:04:54] INFO - Model loaded at startup: RandomForestRegressor
