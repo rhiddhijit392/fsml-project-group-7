@@ -20,5 +20,5 @@ RUN pip install --upgrade pip && \
 #copy rest of the project files
 COPY . .
 
-#replace src/train.py with pipeline/pipeline.py later
-CMD ["python", "src/train.py"]
+#run pipeline
+CMD ["python", "pipeline/pipeline.py"]
