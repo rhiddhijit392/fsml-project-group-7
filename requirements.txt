@@ -1,7 +1,7 @@
 numpy
 pandas
 matplotlib
-xgboost 
+xgboost==2.0.3
 PyYAML
 joblib
 scikit-learn

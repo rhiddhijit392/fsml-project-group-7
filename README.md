@@ -157,6 +157,7 @@ Plots and results are saved to `outputs/`.
 
 ## 🏗️ System Architecture
 
+```text
 ┌──────────────────────┐
 │   Stock Dataset      │
 │ (Yahoo Finance CSV)  │
@@ -191,6 +192,7 @@ Plots and results are saved to `outputs/`.
 │ Client (Browser/API) │
 │  http://localhost    │
 └──────────────────────┘
+```
 
 ---
 
