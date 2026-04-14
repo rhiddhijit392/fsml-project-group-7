@@ -11,6 +11,14 @@ venv/
 *.egg-info/
 .pytest_cache/
 
+# --- Models ---
+*.pkl
+models/*.pkl
+
+# --- Logs ---
+logs/
+*.log
+
 # --- VS Code ---
 .vscode/
 !.vscode/settings.json
@@ -18,11 +26,8 @@ venv/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# --- git ---
-.gitattribute
+# --- Git ---
+.gitattributes
 
-# --- MacOS ---
+# --- OS ---
 .DS_Store
-*.pkl
-*.pkl
-*.log
