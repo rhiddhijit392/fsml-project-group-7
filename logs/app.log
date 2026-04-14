@@ -914,3 +914,35 @@ Feature names seen at fit time, yet now missing:
 [2026-04-14 20:03:56] INFO - Model loaded at startup: RandomForestRegressor
 [2026-04-14 20:04:54] INFO - Model loaded from 'models/model_v1.pkl'
 [2026-04-14 20:04:54] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-14 22:27:49] INFO - Config loaded from 'config.yaml'
+[2026-04-14 22:27:49] INFO - Directories ensured: ['models/', 'logs/']
+[2026-04-14 22:27:50] INFO - =======================================================
+[2026-04-14 22:27:50] INFO -   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-14 22:27:50] INFO -   Models : Random Forest | XGBoost
+[2026-04-14 22:27:50] INFO -   Target : Next Day Closing Price
+[2026-04-14 22:27:50] INFO - =======================================================
+[2026-04-14 22:27:50] INFO - X shape: (600180, 9) | y range: 1.03 to 6509.35
+[2026-04-14 22:27:50] INFO - Train: 500,150 rows | Test: 100,030 rows
+[2026-04-14 22:27:50] INFO - Training Random Forest Regressor (2-3 mins)...
+[2026-04-14 22:29:16] INFO - -- Random Forest Regressor Metrics --------------------------
+[2026-04-14 22:29:16] INFO -    MAE      : 1.7374   (avg error in $ price)
+[2026-04-14 22:29:16] INFO -    RMSE     : 3.5377  (penalizes large errors more)
+[2026-04-14 22:29:16] INFO -    R2 Score : 0.999   (1.0 = perfect fit)
+[2026-04-14 22:29:16] INFO - --------------------------------------------------
+[2026-04-14 22:29:16] INFO - Random Forest training complete.
+[2026-04-14 22:29:16] INFO - Training XGBoost Regressor...
+[2026-04-14 22:29:17] INFO - -- XGBoost Regressor Metrics --------------------------
+[2026-04-14 22:29:17] INFO -    MAE      : 2.1979   (avg error in $ price)
+[2026-04-14 22:29:17] INFO -    RMSE     : 6.469  (penalizes large errors more)
+[2026-04-14 22:29:17] INFO -    R2 Score : 0.9966   (1.0 = perfect fit)
+[2026-04-14 22:29:17] INFO - --------------------------------------------------
+[2026-04-14 22:29:17] INFO - XGBoost training complete.
+[2026-04-14 22:29:17] INFO - Model comparison table generated.
+[2026-04-14 22:29:21] INFO - Model saved to 'models/model_v1.pkl'
+[2026-04-14 22:29:21] INFO - Best model : Random Forest Regressor
+[2026-04-14 22:29:21] INFO - Saved to   : models/model_v1.pkl
+[2026-04-14 22:29:21] INFO - R2 Score   : 0.999
+[2026-04-14 22:29:56] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-14 22:29:56] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-14 22:30:48] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 149.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-14 22:30:48] INFO - Prediction: $147.75 | Direction: DOWN

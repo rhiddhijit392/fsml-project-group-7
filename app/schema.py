@@ -15,7 +15,7 @@ class StockInput(BaseModel):
     Open: float = Field(..., description="Today's opening price", example=150.0)
     High: float = Field(..., description="Today's highest price", example=155.0)
     Low: float = Field(..., description="Today's lowest price", example=148.0)
-    Close: float
+    Close: float = Field(..., description="Today's closing price", example=149.0)
     Volume: float = Field(..., description="Today's trading volume", example=1200000.0)
     Daily_Return: float = Field(..., description="(Close - Open) / Open", example=0.012)
     Price_Range: float = Field(..., description="High - Low", example=7.0)
