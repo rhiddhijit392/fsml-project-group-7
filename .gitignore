@@ -26,3 +26,4 @@ venv/
 *.pkl
 *.pkl
 *.log
+logs/
