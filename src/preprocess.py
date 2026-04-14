@@ -2,7 +2,7 @@ import pandas as pd
 
 def preprocess(df):
     df = df.copy()
-
+    df = df.sample(n=150000, random_state=42)
     # 1. Clean column names
     df.columns = [col.strip() for col in df.columns]
 
