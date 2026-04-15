@@ -87,9 +87,9 @@ def run_evaluation(df=None, model=None, X_test=None, y_test=None, test_indices=N
     print("=" * 55)
 
     # Step 5 -- Confusion matrix (UP/DOWN direction)
-    close_test       = df['Close'].iloc[test_indices].values
-    pred_direction   = (y_pred > close_test).astype(int)
-    actual_direction = (y_test.values > close_test).astype(int)
+    close_test       = df.loc[y_test.index, 'Close'].values
+    pred_direction   = (y_pred - close_test > 0).astype(int)
+    actual_direction = (y_test.values - close_test > 0).astype(int)
     cm               = confusion_matrix(actual_direction, pred_direction)
     dir_accuracy     = round(accuracy_score(actual_direction, pred_direction), 4)
     tn, fp, fn, tp   = cm.ravel()

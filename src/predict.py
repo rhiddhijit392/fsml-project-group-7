@@ -71,8 +71,7 @@ def run_prediction(df=None, model=None):
     results = predict_next_day_close(latest_df, model=model)
     output  = results[['Company', 'Date', 'Open', 'High', 'Low', 'Close',
                         'MA_5', 'Daily_Return', 'Predicted_Next_Close']].copy()
-    output['Direction']          = output.apply(
-        lambda r: 'UP' if r['Predicted_Next_Close'] > r['Close'] else 'DOWN', axis=1)
+    output['Direction'] = np.where(output['Predicted_Next_Close'] > output['Close'], 'UP', 'DOWN')
     output['Expected_Change($)'] = round(output['Predicted_Next_Close'] - output['Close'], 2)
 
     # Step 4 -- Display results

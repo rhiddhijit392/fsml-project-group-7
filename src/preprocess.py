@@ -15,10 +15,9 @@ def preprocess(df):
     # 4. Handle missing values per company
     df = df.set_index('Company')
     df = df.groupby(level=0).ffill()
-    df = df.reset_index()
 
     # 5. Reset index
-    df = df.reset_index(drop=True)
+    df = df.reset_index().reset_index(drop=True)
     print(f"Preprocessing complete: {df.shape[0]} rows, {df.shape[1]} columns")
 
     return df
