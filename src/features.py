@@ -18,7 +18,16 @@ def build_features(df):
     # 4. Volume change %
     df['Volume_Change'] = df.groupby('Company')['Volume'].pct_change().shift(1)
 
-    # 5. Target
+    # 5. 5 day Volatality
+    df['Volatility_5'] = df.groupby('Company')['Close'].transform(
+    lambda x: x.pct_change().rolling(5).std().shift(1)
+    )
+
+    # 6. 5 day Momentum
+    df['Momentum_5'] = df.groupby('Company')['Close'].transform(
+    lambda x: x - x.shift(5)
+    )
+    # 7. Target
     df['Next_Day_Close'] = df.groupby('Company')['Close'].shift(-1)
 
     # Drop NaN rows

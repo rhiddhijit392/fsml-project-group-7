@@ -21,7 +21,7 @@ logger = setup_logger("logs/app.log")
 ensure_dirs(["logs/", "outputs/"])
 
 FEATURE_COLS = [
-    'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change',
+    'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change', 'Volatility_5', "Momentum_5",
 ]
 MODEL_PATH = "models/model_v1.pkl"
 
