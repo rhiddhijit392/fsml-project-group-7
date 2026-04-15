@@ -132,9 +132,8 @@ def run_training(df: pd.DataFrame):
 
     print(f"\nBest Model : {best_model_name}")
     print(f"Saved to   : {MODEL_PATH}")
-    print("\nTraining pipeline complete!")
 
-    return best_model, X_test, y_test, saved_test_idx
+    return best_model, X_train, X_test, y_train, y_test, saved_test_idx
 
 #standalone run warning
 if __name__ == "__main__":
