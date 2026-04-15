@@ -23,7 +23,7 @@ ensure_dirs(["logs/", "outputs/"])
 FEATURE_COLS = [
     'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change',
 ]
-MODEL_PATH = "models/model_v1.pkl"
+MODEL_PATH = os.environ.get("MODEL_PATH", "/app/models/model_v1.pkl")
 
 
 def predict_next_day_close(input_df: pd.DataFrame, model=None) -> pd.DataFrame:
