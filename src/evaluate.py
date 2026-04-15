@@ -24,8 +24,6 @@ from sklearn.metrics import (
     confusion_matrix, accuracy_score, classification_report,
 )
 from sklearn.model_selection import TimeSeriesSplit
-
-from pipeline.pipeline import run_pipeline
 from src.utils import setup_logger, load_model, ensure_dirs
 
 logger = setup_logger("logs/app.log")
@@ -50,25 +48,14 @@ def run_evaluation(df=None, model=None, X_test=None, y_test=None, test_indices=N
         model = load_model(MODEL_PATH)
     logger.info(f"Model: {type(model).__name__}")
 
-    # Step 2 -- Rebuild data (standalone mode only)
-    if df is None:
-        df = run_pipeline()
-        if TARGET_COL not in df.columns:
-            df[TARGET_COL] = df.groupby('Company')['Close'].shift(-1)
-            df = df.dropna(subset=[TARGET_COL]).reset_index(drop=True)
-        df = df.replace([float('inf'), float('-inf')], float('nan'))
-        df = df.dropna().reset_index(drop=True)
-        logger.info(f"Clean data shape: {df.shape}")
+    # # Step 2 -- Check if dataframe is available
+    if df is None or len(df) == 0:
+        raise ValueError("Evaluation requires valid dataframe from pipeline")
 
-    # Step 3 -- Recreate TimeSeriesSplit (standalone mode only)
-    if X_test is None:
-        X = df[FEATURE_COLS]
-        y = df[TARGET_COL]
-        tscv = TimeSeriesSplit(n_splits=5)
-        for fold, (train_idx, test_idx) in enumerate(tscv.split(X)):
-            X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-            y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
-            test_indices    = test_idx
+    # Step 3 -- use available dataframe
+    X_test = df[FEATURE_COLS]
+    y_test = df[TARGET_COL]
+
     logger.info(f"Test set size: {len(y_test):,} rows")
 
     # Step 4 -- Generate predictions and regression metrics

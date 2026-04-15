@@ -15,7 +15,6 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from pipeline.pipeline import run_pipeline
 from src.utils import setup_logger, load_model, ensure_dirs
 
 logger = setup_logger("logs/app.log")
@@ -62,9 +61,7 @@ def run_prediction(df=None, model=None):
 
     # Step 2 -- Load data
     if df is None:
-        df = run_pipeline()
-        df = df.replace([float('inf'), float('-inf')], float('nan'))
-        df = df.dropna().reset_index(drop=True)
+        raise ValueError("Input dataframe required for prediction")
     logger.info(f"Clean data shape: {df.shape}")
 
     # Step 3 -- Get last 10 rows per company and predict
