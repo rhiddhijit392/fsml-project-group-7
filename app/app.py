@@ -26,7 +26,7 @@ from src.utils import setup_logger, load_model
 logger = setup_logger("logs/app.log")
 
 # -- Load model once at startup (not on every request) ------------------------
-MODEL_PATH = "models/model_v1.pkl"
+MODEL_PATH = os.environ.get("MODEL_PATH", "/app/models/model_v1.pkl")
 
 try:
     model = load_model(MODEL_PATH)
