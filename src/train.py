@@ -79,8 +79,7 @@ def run_training(df: pd.DataFrame):
     # Step 5 -- Train Random Forest Regressor
     logger.info("Training Random Forest Regressor (2-3 mins)...")
     rf_model = RandomForestRegressor(
-    n_estimators=30,      # ⬅ reduce from 100
-    max_depth=12,         # ⬅ limit tree size
+    n_estimators=100,
     random_state=42,
     n_jobs=-1
 )
@@ -92,9 +91,7 @@ def run_training(df: pd.DataFrame):
     # Step 6 -- Train XGBoost Regressor
     logger.info("Training XGBoost Regressor...")
     xgb_model = XGBRegressor(
-    n_estimators=50,      # ⬅ reduce
-    max_depth=5,          # ⬅ limit complexity
-    learning_rate=0.1,
+    n_estimators=100,
     random_state=42,
     eval_metric='rmse',
     verbosity=0
