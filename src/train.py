@@ -86,9 +86,11 @@ def run_training(df: pd.DataFrame):
     logger.info("Training Random Forest Regressor (2-3 mins)...")
     rf_model = RandomForestRegressor(
     n_estimators=100,
+    max_depth=None,          # IMPORTANT FIX
+    min_samples_leaf=10,
     random_state=42,
     n_jobs=-1
-)
+    )
     rf_model.fit(X_train, y_train)
     rf_preds   = rf_model.predict(X_test)
     rf_metrics = compute_regression_metrics(y_test, rf_preds, "Random Forest Regressor")
@@ -101,7 +103,7 @@ def run_training(df: pd.DataFrame):
     random_state=42,
     eval_metric='rmse',
     verbosity=0
-)
+    )
     xgb_model.fit(X_train, y_train)
     xgb_preds   = xgb_model.predict(X_test)
     xgb_metrics = compute_regression_metrics(y_test, xgb_preds, "XGBoost Regressor")
