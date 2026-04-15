@@ -150,7 +150,6 @@ def run_evaluation(df=None, model=None, X_test=None, y_test=None, test_indices=N
     print("  Plot 1 -- Actual vs Predicted")
     print("  Plot 2 -- Residuals Distribution")
     print("  Plot 3 -- Confusion Matrix (UP/DOWN)")
-    print("\nEvaluation complete!")
 
 
 if __name__ == "__main__":

@@ -96,7 +96,6 @@ def run_prediction(df=None, model=None):
     output.to_csv(save_path, index=False)
     logger.info(f"Predictions saved to '{save_path}'")
     print(f"\nFull predictions saved to: {save_path}")
-    print("\nPrediction pipeline complete!")
 
 
 if __name__ == "__main__":
