@@ -1,11 +1,6 @@
 #select a python version
 FROM python:3.12-slim
 
-#install OpenMP for xgboost
-RUN apt-get update && apt-get install -y \
-    libgomp1 \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1
