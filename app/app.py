@@ -37,11 +37,11 @@ except FileNotFoundError:
 
 # -- Must match FEATURE_COLS in train.py exactly ------------------------------
 FEATURE_COLS = [
-    'Open',
-    'High',
-    'Low',
-    'Close',
-    'Volume',
+    # 'Open',
+    # 'High',
+    # 'Low',
+    # 'Close',
+    # 'Volume',
     'Daily_Return',
     'Price_Range',
     'MA_5',

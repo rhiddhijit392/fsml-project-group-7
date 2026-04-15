@@ -31,7 +31,6 @@ ensure_dirs(["models/", "logs/"])
 tscv = TimeSeriesSplit(n_splits=5)
 
 FEATURE_COLS = [
-    'Open', 'High', 'Low', 'Close', 'Volume',
     'Daily_Return', 'Price_Range', 'MA_5', 'Volume_Change',
 ]
 TARGET_COL = 'Next_Day_Close'
