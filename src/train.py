@@ -66,12 +66,19 @@ def run_training(df: pd.DataFrame):
     y = df[TARGET_COL]
     logger.info(f"X shape: {X.shape} | y range: {y.min():.2f} to {y.max():.2f}")
 
-    # Step 4 -- TimeSeriesSplit
-    for fold, (train_idx, test_idx) in enumerate(tscv.split(X)):
-        X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-        y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
-        saved_test_idx  = test_idx
-        print(f"Fold {fold+1}: Train={len(train_idx):,} | Test={len(test_idx):,}")
+
+    # Step 4 -- FIXED TRAIN-TEST SPLIT (Chronological)
+    train_size = int(len(X) * 0.8)
+
+    X_train = X.iloc[:train_size]
+    X_test  = X.iloc[train_size:]
+
+    y_train = y.iloc[:train_size]
+    y_test  = y.iloc[train_size:]
+
+    saved_test_idx = X_test.index
+
+    print(f"Train={len(X_train):,} | Test={len(X_test):,}")
 
     logger.info(f"Train: {X_train.shape[0]:,} rows | Test: {X_test.shape[0]:,} rows")
 
