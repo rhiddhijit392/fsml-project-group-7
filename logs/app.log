@@ -946,3 +946,60 @@ Feature names seen at fit time, yet now missing:
 [2026-04-14 22:29:56] INFO - Model loaded at startup: RandomForestRegressor
 [2026-04-14 22:30:48] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 149.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
 [2026-04-14 22:30:48] INFO - Prediction: $147.75 | Direction: DOWN
+[2026-04-15 11:49:28] INFO - Config loaded from 'config.yaml'
+[2026-04-15 11:49:28] INFO - Directories ensured: ['models/', 'logs/']
+[2026-04-15 11:49:29] INFO - Directories ensured: ['logs/', 'outputs/']
+[2026-04-15 11:49:29] INFO - Directories ensured: ['logs/', 'outputs/']
+[2026-04-15 11:49:30] INFO - =======================================================
+[2026-04-15 11:49:30] INFO -   STOCK PRICE REGRESSION TRAINING PIPELINE
+[2026-04-15 11:49:30] INFO -   Models : Random Forest | XGBoost
+[2026-04-15 11:49:30] INFO -   Target : Next Day Closing Price
+[2026-04-15 11:49:30] INFO - =======================================================
+[2026-04-15 11:49:30] INFO - X shape: (599689, 4) | y range: 1.03 to 6509.35
+[2026-04-15 11:49:30] INFO - Train: 499,741 rows | Test: 99,948 rows
+[2026-04-15 11:49:30] INFO - Training Random Forest Regressor (2-3 mins)...
+[2026-04-15 11:50:03] INFO - -- Random Forest Regressor Metrics --------------------------
+[2026-04-15 11:50:03] INFO -    MAE      : 2.8208   (avg error in $ price)
+[2026-04-15 11:50:03] INFO -    RMSE     : 5.5559  (penalizes large errors more)
+[2026-04-15 11:50:03] INFO -    R2 Score : 0.9975   (1.0 = perfect fit)
+[2026-04-15 11:50:03] INFO - --------------------------------------------------
+[2026-04-15 11:50:03] INFO - Random Forest training complete.
+[2026-04-15 11:50:03] INFO - Training XGBoost Regressor...
+[2026-04-15 11:50:04] INFO - -- XGBoost Regressor Metrics --------------------------
+[2026-04-15 11:50:04] INFO -    MAE      : 2.9601   (avg error in $ price)
+[2026-04-15 11:50:04] INFO -    RMSE     : 6.0992  (penalizes large errors more)
+[2026-04-15 11:50:04] INFO -    R2 Score : 0.997   (1.0 = perfect fit)
+[2026-04-15 11:50:04] INFO - --------------------------------------------------
+[2026-04-15 11:50:04] INFO - XGBoost training complete.
+[2026-04-15 11:50:04] INFO - Model comparison table generated.
+[2026-04-15 11:50:13] INFO - Model saved to 'models/model_v1.pkl'
+[2026-04-15 11:50:13] INFO - Best model : Random Forest Regressor
+[2026-04-15 11:50:13] INFO - Saved to   : models/model_v1.pkl
+[2026-04-15 11:50:13] INFO - R2 Score   : 0.9975
+[2026-04-15 11:50:13] INFO - =======================================================
+[2026-04-15 11:50:13] INFO -   MODEL EVALUATION PIPELINE
+[2026-04-15 11:50:13] INFO -   Regression Metrics + Direction Confusion Matrix
+[2026-04-15 11:50:13] INFO - =======================================================
+[2026-04-15 11:50:13] INFO - Model: RandomForestRegressor
+[2026-04-15 11:50:13] INFO - Test set size: 599,689 rows
+[2026-04-15 11:50:16] INFO -   MAE: 1.6256 | RMSE: 4.5288 | R2: 0.9997
+[2026-04-15 11:50:16] INFO -   Direction Accuracy: 0.7339 (73.39%)
+[2026-04-15 11:50:17] INFO - 3 plots saved to 'outputs/evaluation_plots.png'
+[2026-04-15 11:50:17] INFO - =======================================================
+[2026-04-15 11:50:17] INFO -   STOCK PRICE PREDICTION PIPELINE
+[2026-04-15 11:50:17] INFO -   Predicting: Next Day Closing Price
+[2026-04-15 11:50:17] INFO - =======================================================
+[2026-04-15 11:50:17] INFO - Model loaded: RandomForestRegressor
+[2026-04-15 11:50:17] INFO - Clean data shape: (599689, 14)
+[2026-04-15 11:50:17] INFO - Predicting for 491 companies...
+[2026-04-15 11:50:17] INFO - Predictions saved to 'outputs/predictions.csv'
+[2026-04-15 11:51:07] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-15 11:51:07] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-15 11:51:25] INFO - Received prediction request: {'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-15 11:51:25] ERROR - Prediction failed: 'StockInput' object has no attribute 'Open'
+[2026-04-15 11:52:22] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-15 11:52:22] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-15 11:53:17] INFO - Model loaded from 'models/model_v1.pkl'
+[2026-04-15 11:53:17] INFO - Model loaded at startup: RandomForestRegressor
+[2026-04-15 11:53:40] INFO - Received prediction request: {'Open': 150.0, 'High': 155.0, 'Low': 148.0, 'Close': 149.0, 'Volume': 1200000.0, 'Daily_Return': 0.012, 'Price_Range': 7.0, 'MA_5': 149.5, 'Volume_Change': 0.05}
+[2026-04-15 11:53:40] INFO - Prediction: $148.62 | Direction: DOWN
