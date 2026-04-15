@@ -1,1 +1,2 @@
+Dataset used in this project is available to download on Kaggle:
 https://www.kaggle.com/datasets/iveeaten3223times/massive-yahoo-finance-dataset
