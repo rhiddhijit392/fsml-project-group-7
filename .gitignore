@@ -36,3 +36,5 @@ logs/
 # --- Model ---
 *.pkl
 *.log
+
+outputs/
